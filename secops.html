@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xceedance Security Operations Interview Guide — Associate Analyst</title>
+<meta name="description" content="Teaching-first interview guide for Xceedance Gurugram Associate Analyst — Security Operations. Written for a B.Tech Computer Science graduate with no security background.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#1a1714; --muted:#5c564e; --line:#e4ddd3; --paper:#f6f1e8; --card:#fffcf7;
+    --navy:#10243a; --navy-2:#17324f; --teal:#1b6f63; --teal-d:#14574d; --gold:#b7791f;
+    --chip:#eef4f2; --shadow:0 10px 30px rgba(16,36,58,.08);
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; color:var(--ink); background:var(--paper); font-family:"Source Sans 3",system-ui,sans-serif; font-size:18px; line-height:1.65; }
+  a { color:var(--teal-d); }
+  code, .mono { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:.9em; }
+  .wrap { display:grid; grid-template-columns:280px 1fr; min-height:100vh; }
+  nav { position:sticky; top:0; height:100vh; overflow:auto; background:var(--navy); color:#e8efe9; padding:18px 16px 40px; }
+  nav .switch { display:flex; gap:6px; margin-bottom:14px; }
+  nav .switch a { flex:1; text-align:center; background:#1c3a58; color:#fff; padding:7px 6px; border-radius:8px; font-size:.75rem; font-weight:650; text-decoration:none; }
+  nav .switch a.on { background:#1b6f63; }
+  nav h1 { font-family:Fraunces,Georgia,serif; font-size:1.05rem; line-height:1.3; margin:0 0 6px; color:#fff; }
+  nav p { margin:0 0 14px; color:#b7c4c0; font-size:.82rem; }
+  nav input { width:100%; padding:9px 10px; border:0; border-radius:8px; background:#1c3a58; color:#fff; margin-bottom:14px; }
+  nav a.t { display:block; color:#c9d6d1; text-decoration:none; font-size:.86rem; padding:5px 8px; border-radius:6px; }
+  nav a.t:hover, nav a.t.active { background:#1c3a58; color:#fff; }
+  nav .g { margin:14px 0 6px; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:#8aa39a; }
+  main { padding:28px 8vw 80px; max-width:980px; }
+  .hero { background:linear-gradient(145deg,var(--navy),#1a3d5c 50%,#1b6f63); color:#fff; border-radius:18px; padding:36px 32px; margin-bottom:28px; box-shadow:var(--shadow); }
+  .hero .kicker { letter-spacing:.12em; text-transform:uppercase; font-size:.75rem; color:#c9e6df; }
+  .hero h2 { font-family:Fraunces,Georgia,serif; font-weight:650; font-size:clamp(1.8rem,4vw,2.5rem); line-height:1.15; margin:8px 0 12px; }
+  .hero p { color:#dce7e3; margin:0 0 10px; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .chip { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); color:#fff; padding:5px 10px; border-radius:999px; font-size:.8rem; }
+  h2,h3,h4 { font-family:Fraunces,Georgia,serif; letter-spacing:-.01em; }
+  h2 { font-size:1.85rem; margin:2.2rem 0 .6rem; color:var(--navy); }
+  h3 { font-size:1.3rem; margin:1.6rem 0 .45rem; color:var(--navy-2); }
+  h4 { font-size:1.05rem; margin:1.2rem 0 .3rem; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin:14px 0; }
+  .callout { border-left:4px solid var(--teal); padding-left:14px; }
+  .warn { border-left:4px solid var(--gold); }
+  .ex { background:#eef6f3; border:1px solid #d5e8e2; }
+  .bad { background:#fbf1ea; border:1px solid #f0d7c7; }
+  .grc { background:#eef3f8; border:1px solid #d3deea; }
+  table { width:100%; border-collapse:collapse; font-size:.95rem; margin:12px 0 18px; }
+  th,td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#efe8db; font-weight:650; }
+  ul,ol { padding-left:1.2rem; }
+  li { margin:.28rem 0; }
+  .qa { border:1px solid var(--line); border-radius:12px; background:var(--card); margin:10px 0; overflow:hidden; }
+  .qa summary { cursor:pointer; padding:12px 16px; font-weight:650; color:var(--navy); list-style:none; }
+  .qa summary::-webkit-details-marker { display:none; }
+  .qa summary:before { content:"Q  "; color:var(--teal); font-family:Fraunces,serif; }
+  .qa[open] summary { border-bottom:1px solid var(--line); background:#f3eee5; }
+  .qa .a { padding:12px 16px 16px; }
+  .qa .a:before { content:"Answer"; display:block; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--teal); margin-bottom:6px; font-weight:700; }
+  .follow { margin-top:12px; padding-top:10px; border-top:1px dashed var(--line); font-size:.95rem; }
+  .follow strong { color:var(--navy-2); }
+  .why { font-size:.92rem; color:var(--muted); margin-top:8px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .tag { display:inline-block; background:var(--chip); color:var(--teal-d); font-size:.75rem; font-weight:650; padding:2px 8px; border-radius:999px; margin-right:6px; }
+  .diagram { background:#10243a; color:#e8efe9; border-radius:14px; padding:16px; overflow-x:auto; margin:14px 0 18px; font-size:.88rem; }
+  .diagram svg { display:block; max-width:100%; height:auto; margin:0 auto; }
+  .layers { display:grid; gap:6px; }
+  .layers div { padding:8px 12px; border-radius:8px; color:#10243a; font-weight:650; }
+  .osi7{background:#c5ebe3;} .osi6{background:#b7e0d6;} .osi5{background:#a8d4c8;}
+  .osi4{background:#f3d9a4;} .osi3{background:#e8c07a;} .osi2{background:#d9b8e8;} .osi1{background:#c9c9c9;}
+  .flow { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .flow span { background:#1c3a58; padding:8px 10px; border-radius:8px; }
+  .flow .arr { background:transparent; color:#8aa39a; padding:0; }
+  @media (max-width:980px){
+    .wrap{grid-template-columns:1fr;} nav{position:relative;height:auto;}
+    .grid{grid-template-columns:1fr;} main{padding:20px 18px 60px;}
+  }
+  footer { color:var(--muted); font-size:.85rem; margin-top:40px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav id="toc">
+  <div class="switch">
+    <a href="home.html">Both guides</a>
+    <a class="on" href="secops.html">SecOps</a>
+    <a href="index.html">GRC</a>
+  </div>
+  <h1>Security Operations Interview Guide</h1>
+  <p>Associate Analyst · Xceedance Gurugram · interview is first</p>
+  <input id="q" type="search" placeholder="Search this page…" oninput="filterPage(this.value)">
+  <div class="g">Start here</div>
+  <a class="t" href="#how">How to use this guide</a>
+  <a class="t" href="#plan">Study plan</a>
+  <a class="t" href="#overlap">Overlap with GRC</a>
+  <div class="g">Company and role</div>
+  <a class="t" href="#company">Xceedance, this team</a>
+  <a class="t" href="#jd">Job description decoded</a>
+  <a class="t" href="#vs-grc">SecOps vs GRC</a>
+  <a class="t" href="#day">A shift in this job</a>
+  <div class="g">Foundation — her hot topics</div>
+  <a class="t" href="#systems">What is a system</a>
+  <a class="t" href="#infosys">Information systems</a>
+  <a class="t" href="#os">How a computer actually runs</a>
+  <a class="t" href="#networks">Networks from zero</a>
+  <a class="t" href="#osi">OSI model</a>
+  <a class="t" href="#tcp">TCP, UDP, IP, ports</a>
+  <a class="t" href="#services">DNS, HTTP, email, VPN</a>
+  <a class="t" href="#firewall">Firewalls and network controls</a>
+  <a class="t" href="#secfund">Information security fundamentals</a>
+  <a class="t" href="#sdlc">Software engineering and SDLC</a>
+  <div class="g">Then the SOC job</div>
+  <a class="t" href="#soc">What a SOC does</a>
+  <a class="t" href="#event">Event, alert, incident</a>
+  <a class="t" href="#logs">Logs</a>
+  <a class="t" href="#windows">Windows and Linux</a>
+  <a class="t" href="#identity">Identity, email, cloud</a>
+  <a class="t" href="#siem">SIEM</a>
+  <a class="t" href="#edr">EDR, XDR, SOAR</a>
+  <a class="t" href="#detect">Detection and MITRE</a>
+  <a class="t" href="#triage">Triage and incident response</a>
+  <a class="t" href="#vuln">Vulnerability management</a>
+  <a class="t" href="#attacks">Attacks you must recognise</a>
+  <a class="t" href="#ifrs">IFRS 9 / WoE notes</a>
+  <div class="g">Then interview</div>
+  <a class="t" href="#intro">How to introduce yourself</a>
+  <a class="t" href="#qa-company">Company questions</a>
+  <a class="t" href="#qa-fund">Foundation questions</a>
+  <a class="t" href="#qa-net">Networking questions</a>
+  <a class="t" href="#qa-soc">SOC and tool questions</a>
+  <a class="t" href="#qa-scenario">Scenario questions</a>
+  <a class="t" href="#qa-behave">Behavioural and HR</a>
+  <a class="t" href="#ask">Questions you should ask</a>
+  <a class="t" href="#mistakes">Mistakes to avoid</a>
+  <a class="t" href="#cheat">Cheat sheet</a>
+</nav>
+<main>
+<header class="hero">
+  <div class="kicker">Interview is first · teach, then questions</div>
+  <h2>Associate Analyst — Security Operations at Xceedance, Gurugram</h2>
+  <p>This page is for the same B.Tech Computer Science graduate as the GRC guide. She has not studied security. The referrer’s monitoring notes were dense; this rewrite starts from “what is a system” and only then reaches SIEM, alerts, and incidents.</p>
+  <p>The Security Operations interview is earlier than GRC. Study this guide first. The GRC guide is unchanged and linked at the top.</p>
+  <div class="chips">
+    <span class="chip">0–1 year · fresher OK</span>
+    <span class="chip">Office · Gurugram</span>
+    <span class="chip">Night shifts / weekends / holidays</span>
+    <span class="chip">Monitoring · triage · IR · vulnerabilities</span>
+    <span class="chip">OSI · TCP/IP · logs · SIEM</span>
+  </div>
+</header>
+
+<section id="how">
+  <h2>How to use this guide</h2>
+  <p>Read in order. Do not jump to SIEM or MITRE until you can draw the OSI model and explain a log. If you memorise tool names without the foundation, the first follow-up question will empty the room.</p>
+  <ol>
+    <li>Read the company and “SecOps vs GRC” once. You must say what Xceedance does, and why this team is not the GRC team.</li>
+    <li>Study every foundation chapter. After each one, close the laptop and explain it to a wall using a claims-laptop example.</li>
+    <li>Then study the SOC chapters: event vs alert, logs, SIEM, triage.</li>
+    <li>Only then open interview questions. Answer out loud, then open the model answer, then the follow-up.</li>
+    <li>Do a 45-minute mock: a friend picks random questions, including “walk me through this alert.”</li>
+  </ol>
+  <div class="card callout">
+    <strong>The one sentence this job is about.</strong>
+    Xceedance’s systems are attacked and misused the same way any company’s are. Security Operations is the team that watches the cameras, reads the alarms, decides which alarms are real, and starts the response — 24 hours a day, because clients are in the US and UK.
+  </div>
+  <p>The referrer shared a “Security Monitoring &amp; Detection” note. It is a useful syllabus but it assumes you already speak security. This page teaches the same topics from scratch, then goes past it into the actual JD: vulnerability tracking, tickets, handover notes, identity/email/cloud operations, and remaining calm on a night shift.</p>
+</section>
+
+<section id="plan">
+  <h2>Study plan — SecOps interview comes first</h2>
+  <p>Give this role the next 7 days. Park GRC until this interview is done, except for the overlap list below (CIA, risk words, least privilege). You already have those in the GRC guide if you started it.</p>
+  <table>
+    <tr><th>Day</th><th>Master this</th><th>You are ready when…</th></tr>
+    <tr><td>1</td><td>Company, this JD, systems, information systems, how a computer runs</td><td>You can explain a “claims system” as people + process + servers + data.</td></tr>
+    <tr><td>2</td><td>OSI, IP, MAC, ports, TCP vs UDP, 3-way handshake</td><td>You can draw seven layers and put HTTP, TLS, TCP, IP, Ethernet in the right place.</td></tr>
+    <tr><td>3</td><td>DNS, HTTP/HTTPS, firewall, VPN, common ports</td><td>You can say what a firewall log line means in plain English.</td></tr>
+    <tr><td>4</td><td>CIA, threat/vuln/risk, attacks at story level, SDLC</td><td>You can map phishing to CIA and to a development mistake (no input checks).</td></tr>
+    <tr><td>5</td><td>Event vs alert vs incident, logs, Windows IDs, Linux auth, identity, email</td><td>You can triage “50 failed logins” without freezing.</td></tr>
+    <tr><td>6</td><td>SIEM, EDR, detection, MITRE, IR steps, vulnerabilities</td><td>You can walk collect → correlate → alert → isolate.</td></tr>
+    <tr><td>7</td><td>Mock interview + cheat sheet + questions to ask them</td><td>45 minutes, no notes.</td></tr>
+  </table>
+  <div class="card warn">
+    <strong>Certifications:</strong> ISC2 CC, Security+, SC-900, SC-200, CSA (SOC analyst) are listed as preferred, not a gate. Do not delay the interview for a cert. Saying “I am studying Security+ Domain 1 and 2, and I can talk through OSI, logs, and triage” is enough for 0–1 years.
+  </div>
+</section>
+
+<section id="overlap">
+  <h2>Topics that also help the GRC interview</h2>
+  <p>Do not skip these here just because they appear in GRC. In SecOps you must use them operationally (what would you <em>see in a log</em>). Later, in GRC, you will use the same words for policy and evidence. The GRC guide is not edited; this table tells you where the ideas already live.</p>
+  <table>
+    <tr><th>Topic</th><th>In this SecOps guide</th><th>In the GRC guide (unchanged)</th></tr>
+    <tr><td>CIA triad</td><td>How an alert maps to C, I, or A</td><td>Chapter “CIA triad”</td></tr>
+    <tr><td>Threat, vulnerability, risk</td><td>Used every time you prioritise an alert</td><td>Chapter “Threat, vulnerability, risk”</td></tr>
+    <tr><td>Least privilege, AAA, access control</td><td>Identity logs, admin alerts</td><td>Access control chapter</td></tr>
+    <tr><td>Policy vs procedure vs record</td><td>You follow playbooks and write tickets (records)</td><td>Governance documents</td></tr>
+    <tr><td>Incident vs evidence</td><td>You collect the evidence GRC later shows auditors</td><td>Audit and evidence</td></tr>
+    <tr><td>Privacy / data classification</td><td>Logs contain PII — handle tickets carefully</td><td>Privacy and classification</td></tr>
+    <tr><td>Vendor / third party</td><td>A partner SOC or a cloud vendor may send you alerts</td><td>Third-party risk</td></tr>
+    <tr><td>Xceedance company facts</td><td>Same firm, insurance data, Gurugram SEZ</td><td>Company research</td></tr>
+    <tr><td>Integrity, confidentiality, English writing</td><td>Handover notes, incident timeline</td><td>Core of the GRC JD</td></tr>
+    <tr><td>ISO 27001 / SOC 2 awareness</td><td>Your tickets become audit evidence</td><td>Framework chapters</td></tr>
+  </table>
+  <div class="card grc">
+    <span class="tag">Also in GRC</span>
+    Whenever you see this teal-on-cream box, the idea is shared. Learn it once, with a <em>monitoring</em> example here. For the later GRC interview, reuse the definition and switch the example to policy or a risk register.
+  </div>
+</section>
+
+<section id="company">
+  <h2>1. Same company, different function</h2>
+  <p>You do not need to re-research Xceedance from zero if you already read the GRC guide. Keep these facts ready in 30 seconds:</p>
+  <ul>
+    <li>Insurance-focused consulting, technology, and managed services. Founded 2013. CEO Arun Balakrishnan.</li>
+    <li>350+ P&amp;C insurers, reinsurers, brokers, MGAs. Delivery from India (Gurugram Sector 48 Candor TechSpace), plus US, UK, Poland, Australia.</li>
+    <li>They process policy, claims, underwriting, finance, and technology work — so they hold client and policyholder data.</li>
+    <li>Information security leadership includes VP Information Security (Kuljit Singh Hooda) and VP IT &amp; Information Security (Tirath Singh). Corporate services (Amar Gomber) includes IT and security.</li>
+    <li>Values: Integrity, Collaboration, Ownership, Respect, Persistence.</li>
+  </ul>
+  <p>Why Security Operations exists here: attackers do not care that Xceedance is “only a service provider.” A phished Gurugram mailbox, a ransomware-hit claims workstation, or an open RDP port can spill US/UK policyholder data. Clients demand 24×7 monitoring. This JD is explicit: <strong>rotational shifts, nights, weekends, public holidays</strong>.</p>
+  <p>Xceedance also publicly talks about infrastructure security, vulnerability assessments, monitoring, and standards such as GDPR, ISO 27001, PCI. SOC is the operational engine; GRC is the rulebook and the proof. You may later sit in GRC interviews and say “I understand that SOC tickets are the evidence GRC shows auditors.”</p>
+</section>
+
+<section id="jd">
+  <h2>2. The job description, in human language</h2>
+  <p>Title: <strong>Associate Analyst — Security Operations</strong>. 0–1 year. Gurugram office. Full-time.</p>
+  <table>
+    <tr><th>JD line</th><th>What you would actually do</th></tr>
+    <tr><td>Monitor alerts from approved platforms; follow triage procedures</td><td>A queue of alarms. You do not invent a process. You open the playbook and follow it.</td></tr>
+    <tr><td>Review alerts, collect information, record observations, escalate</td><td>Read the alert, pull related logs, write what you saw, call L2 if it looks real.</td></tr>
+    <tr><td>Support investigation, containment, evidence, timeline, documentation</td><td>You are not the incident commander. You fetch logs, note times, help isolate a host if instructed.</td></tr>
+    <tr><td>Review logs from endpoints, identity, network, cloud, email, apps</td><td>The six places bad things hide. You must know what each source is for.</td></tr>
+    <tr><td>Vulnerability review, remediation tracking, exceptions, reports</td><td>A scanner says “this server is missing a patch.” You track the owner until it is fixed or an exception is approved.</td></tr>
+    <tr><td>Endpoint, email, identity, cloud, network operations under supervision</td><td>You may release a quarantined email, or check MFA failures, always with a procedure.</td></tr>
+    <tr><td>Tickets, shift handover notes, runbooks, incident records, knowledge articles</td><td>The next shift cannot read your mind. Writing is the job.</td></tr>
+    <tr><td>Use-case testing, process improvements, lessons learned, metrics</td><td>After a noisy rule, help test a better one. Count how many true vs false positives.</td></tr>
+  </table>
+  <h3>Foundational knowledge they listed — this is the syllabus</h3>
+  <ul>
+    <li>Networking: TCP/IP, DNS, HTTP/HTTPS, firewalls, VPNs, common services</li>
+    <li>Windows and Linux, identity and access, endpoint protection, email security, cloud basics</li>
+    <li>Monitoring, log analysis, incident response, vulnerability management, common attacks</li>
+    <li>What a SIEM is; what detection rules, alerts, and playbooks are for</li>
+  </ul>
+  <p>They also want a CS/IT/engineering degree (you have CS). Coursework in cyber is preferred, not required if you can talk. The hidden requirement is <strong>calm under time pressure</strong>. GRC can wait until Monday. A ransomware alert at 2 a.m. cannot.</p>
+</section>
+
+<section id="vs-grc">
+  <h2>3. Security Operations is not GRC</h2>
+  <div class="grid">
+    <div class="card ex">
+      <h4>Security Operations (this interview)</h4>
+      <ul>
+        <li>Watches live systems</li>
+        <li>Asks “is this alert real, right now?”</li>
+        <li>Reads logs, isolates a laptop, resets an account</li>
+        <li>Works shifts including nights</li>
+        <li>Output: tickets, timelines, contained hosts</li>
+      </ul>
+    </div>
+    <div class="card grc">
+      <h4>GRC (later interview)</h4>
+      <ul>
+        <li>Writes and maintains the rulebook</li>
+        <li>Asks “are we doing what we promised?”</li>
+        <li>Risk register, policies, questionnaires, audit evidence</li>
+        <li>Shifts possible, but not a 24×7 alarm desk</li>
+        <li>Output: documents, proof, client answers</li>
+      </ul>
+    </div>
+  </div>
+  <p>Hospital picture: GRC keeps the hospital accredited. Security Operations is the emergency desk and the night nurses watching the monitors. Both protect patients (here: clients and policyholders). Do not mix the jobs in either interview.</p>
+  <div class="diagram" aria-label="How an event becomes GRC evidence">
+    <div class="flow">
+      <span>1. Thing happens on a laptop</span>
+      <span class="arr">→</span>
+      <span>2. Log is written</span>
+      <span class="arr">→</span>
+      <span>3. SIEM raises an alert</span>
+      <span class="arr">→</span>
+      <span>4. You triage (SecOps)</span>
+      <span class="arr">→</span>
+      <span>5. Ticket + evidence</span>
+      <span class="arr">→</span>
+      <span>6. GRC uses that evidence in audits</span>
+    </div>
+  </div>
+</section>
+
+<section id="day">
+  <h2>4. A night shift, so you can picture it</h2>
+  <div class="card">
+    <p><strong>20:00.</strong> You take handover: “3 open alerts. One phishing investigation waiting for EDR. VPN brute force from a Romanian IP was blocked. Patch exception for server APP-14 still open.”</p>
+    <p><strong>21:10.</strong> Alert: 40 failed Entra ID sign-ins for one analyst, then a success from a new country. You pull sign-in logs, see MFA was approved. You call the user (or L2 if they are offline). If the user says “I did not approve MFA,” you treat it as compromise: disable account, isolate if the playbook says so, open an incident, write the timeline.</p>
+    <p><strong>00:40.</strong> EDR: WINWORD.EXE spawned powershell.exe with an encoded command. You do not ignore it because you are tired. You check the process tree, parent, network connection. You isolate the host if the playbook says isolate on this pattern, then escalate.</p>
+    <p><strong>05:30.</strong> You write handover: facts, times in UTC and IST, ticket numbers, what is still open. No novels. No “looks fine.”</p>
+  </div>
+  <p>If this sounds like work you want, good. If you wanted only policy writing, say so in the GRC interview later — not here.</p>
+</section>
+
+<section id="systems">
+  <h2>5. What is a system? (start from here)</h2>
+  <p>A <strong>system</strong> is a set of parts that work together for a purpose. A bicycle is a system. A kitchen is a system. A company laptop plus Windows plus Outlook plus a human claims handler is a system.</p>
+  <p>In computing, people say “system” for several nested things. Interviewers are usually talking about one of these. Ask which if you are unsure — that looks mature, not weak.</p>
+  <table>
+    <tr><th>When they say…</th><th>They often mean</th><th>Example at Xceedance</th></tr>
+    <tr><td>Computer system</td><td>Hardware + operating system + programs</td><td>A Gurugram workstation running Windows 11 and Office</td></tr>
+    <tr><td>Information system</td><td>People + process + technology that handle information</td><td>The whole claims process: handlers, the claims app, the database, the rules</td></tr>
+    <tr><td>Operating system</td><td>The software that runs the machine</td><td>Windows, Linux</td></tr>
+    <tr><td>Network system</td><td>How machines talk</td><td>Office LAN, VPN from home, firewall to the internet</td></tr>
+    <tr><td>Security monitoring system</td><td>The stack that watches the others</td><td>SIEM + EDR + email gateway</td></tr>
+  </table>
+  <p><strong>Why SOC cares:</strong> you do not “monitor the company.” You monitor <em>systems</em>: this host, this user account, this firewall, this mailbox. If you cannot name the system, you cannot scope an incident.</p>
+  <div class="card ex">
+    <strong>Tiny example.</strong> “The claims system is slow.” That is not a security alert yet. It might be a network problem, a full disk, or ransomware encrypting files. Your first job is to ask: which host, which application, which user, since when, what changed.
+  </div>
+</section>
+
+<section id="infosys">
+  <h2>6. Information systems</h2>
+  <p>An <strong>information system</strong> is how an organisation captures, stores, processes, and shares information so work can happen. Five parts, always:</p>
+  <ol>
+    <li><strong>People</strong> — claims analyst, underwriter, IT admin, you.</li>
+    <li><strong>Process</strong> — “how we pay a claim,” “how we join a new employee.”</li>
+    <li><strong>Data</strong> — policy numbers, names, medical notes, bank details.</li>
+    <li><strong>Software</strong> — claims application, email, Active Directory, Teams.</li>
+    <li><strong>Hardware / infrastructure</strong> — laptops, servers, cloud, network cables, firewalls.</li>
+  </ol>
+  <p>Security Operations protects the information system while it is running. GRC writes the rules for how that protection should be managed. <span class="tag">Also in GRC</span> Data classification and privacy live on the <em>data</em> piece. Access control lives on the <em>people + software</em> piece.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 720 220" role="img" aria-label="Five parts of an information system">
+      <rect width="720" height="220" rx="12" fill="#10243a"/>
+      <rect x="20" y="70" width="120" height="70" rx="8" fill="#c5ebe3"/>
+      <rect x="160" y="70" width="120" height="70" rx="8" fill="#b7e0d6"/>
+      <rect x="300" y="70" width="120" height="70" rx="8" fill="#f3d9a4"/>
+      <rect x="440" y="70" width="120" height="70" rx="8" fill="#d9b8e8"/>
+      <rect x="580" y="70" width="120" height="70" rx="8" fill="#c9c9c9"/>
+      <text x="80" y="110" text-anchor="middle" fill="#10243a" font-size="14" font-weight="700">People</text>
+      <text x="220" y="110" text-anchor="middle" fill="#10243a" font-size="14" font-weight="700">Process</text>
+      <text x="360" y="110" text-anchor="middle" fill="#10243a" font-size="14" font-weight="700">Data</text>
+      <text x="500" y="110" text-anchor="middle" fill="#10243a" font-size="14" font-weight="700">Software</text>
+      <text x="640" y="110" text-anchor="middle" fill="#10243a" font-size="14" font-weight="700">Hardware</text>
+      <text x="360" y="40" text-anchor="middle" fill="#e8efe9" font-size="16">An information system (example: claims)</text>
+      <text x="360" y="190" text-anchor="middle" fill="#8aa39a" font-size="13">SOC watches all five. An incident usually involves more than one.</text>
+    </svg>
+  </div>
+  <p>Types you may hear: TPS (transaction processing — paying a claim), MIS (management reports), DSS (decision support). You do not need those acronyms. You need: <em>this business process runs on these apps, which run on these machines, which create these logs.</em></p>
+</section>
+
+<section id="os">
+  <h2>7. How a computer actually runs (so logs make sense)</h2>
+  <p>You studied CS, so this is a reminder in SOC language, not an OS course.</p>
+  <ul>
+    <li><strong>Hardware:</strong> CPU, RAM, disk, network card.</li>
+    <li><strong>Operating system:</strong> Windows or Linux. It creates <strong>processes</strong> (running programs), <strong>users</strong>, <strong>files</strong>, and <strong>network connections</strong>.</li>
+    <li><strong>Account:</strong> a name the OS knows (vaibhav, SYSTEM, root). Authentication proves it is really that person (password, MFA).</li>
+    <li><strong>Privilege:</strong> what that account is allowed to do. Administrator / root can change anything. A claims user should not.</li>
+    <li><strong>Parent-child process:</strong> Word starts, then Word starts PowerShell. That family tree is how EDR spots malware. Normal: Word starts. Abnormal: Word starts PowerShell that downloads a file.</li>
+  </ul>
+  <div class="card ex">
+    <strong>SOC translation.</strong> A log saying “process powershell.exe, parent WINWORD.EXE, user riya.claims, destination 185.x.x.x” is a full story: who, what program, who launched it, where it called. You cannot read that story if “process” is a fuzzy word.
+  </div>
+</section>
+
+<section id="networks">
+  <h2>8. Computer networks from zero</h2>
+  <p>A <strong>network</strong> is machines sharing a path so they can exchange messages. The internet is many networks connected. Xceedance’s office is a private network; clients sit on other networks; a VPN is a safe tunnel between them.</p>
+  <h3>Addresses, in the order people confuse them</h3>
+  <table>
+    <tr><th>Address</th><th>Like…</th><th>Example</th><th>SOC use</th></tr>
+    <tr><td><strong>MAC</strong></td><td>The physical name stuck on the network card, used only on the local street</td><td>A1:B2:C3:D4:E5:F6</td><td>Which device on this floor</td></tr>
+    <tr><td><strong>IP</strong></td><td>The postal address that routers understand across the world</td><td>10.12.4.88 (private) or 20.50.1.9 (public)</td><td>Who talked to whom</td></tr>
+    <tr><td><strong>Port</strong></td><td>The apartment number: which program on that machine</td><td>443 = HTTPS, 22 = SSH, 3389 = RDP</td><td>What service was used</td></tr>
+    <tr><td><strong>URL / hostname</strong></td><td>The human name</td><td>mail.office.com</td><td>What the user thought they visited</td></tr>
+  </table>
+  <p><strong>Private IP ranges</strong> (memorise): <span class="mono">10.0.0.0/8</span>, <span class="mono">172.16.0.0/12</span>, <span class="mono">192.168.0.0/16</span>. If a log shows 10.x talking to 8.8.8.8, that is inside → internet. If two 10.x hosts talk, that is internal, and maybe lateral movement.</p>
+  <p><strong>NAT:</strong> many private laptops share one public IP when they go out. In investigations, the firewall must tell you <em>which internal host</em> hid behind that public IP. Without NAT logs, you are blind.</p>
+  <p><strong>DHCP</strong> hands out private IPs. DHCP logs map “10.12.4.88 at 21:07 belonged to laptop CLAIMS-114.” Without that, an IP is a ghost.</p>
+</section>
+
+<section id="osi">
+  <h2>9. The OSI model — draw this until it is boring</h2>
+  <p>OSI is a teaching map with <strong>seven layers</strong>. Real networks use TCP/IP (four layers). Interviewers still ask OSI because it is a shared language: “the firewall is layer 3/4; TLS is layer 6; HTTP is layer 7.”</p>
+  <p><strong>Memory aid, bottom to top:</strong> Please Do Not Throw Sausage Pizza Away.</p>
+  <div class="card">
+    <div class="layers">
+      <div class="osi7">7 Application — the program the human uses. HTTP, DNS, SMTP, FTP. SOC: URLs, email, DNS names. Devices: WAF, proxy.</div>
+      <div class="osi6">6 Presentation — encoding and encryption. TLS/SSL. SOC: HTTPS means you may not see the payload unless something decrypts it.</div>
+      <div class="osi5">5 Session — keeping a conversation open. NetBIOS, RPC.</div>
+      <div class="osi4">4 Transport — ports, reliability. TCP, UDP. SOC: port numbers, SYN floods. Device: stateful firewall.</div>
+      <div class="osi3">3 Network — IP addresses, routing. IP, ICMP. Device: router. SOC: source/destination IP, traceroute, ping scans.</div>
+      <div class="osi2">2 Data link — MAC addresses, frames. Ethernet, ARP, switch. SOC: ARP spoofing, which switch port.</div>
+      <div class="osi1">1 Physical — cables, Wi-Fi radio, fibre. Unplugged cable = availability failure.</div>
+    </div>
+  </div>
+  <p><strong>TCP/IP mapping:</strong> Application (OSI 5–7) · Transport (4) · Internet (3) · Network access (1–2).</p>
+  <div class="card ex">
+    <strong>Courier analogy.</strong> You send a claims PDF to a client portal.<br>
+    Layer 7: “this is an HTTPS POST of a file.”<br>
+    Layer 6: “wrap it in TLS so the van cannot read it.”<br>
+    Layer 4: “use TCP port 443, and retransmit if a box drops.”<br>
+    Layer 3: “deliver to this IP.”<br>
+    Layer 2: “on this office floor, give it to the firewall’s MAC.”<br>
+    Layer 1: “electrical signals on the cable.”<br>
+    An attacker can abuse any layer: cut the cable (1), poison ARP (2), spoof IP (3), SYN flood (4), steal a session (5), fake a certificate (6), phish a URL (7).
+  </div>
+  <p>When you read a firewall log, you are mostly seeing layers 3 and 4 (IP + port) plus an allow/deny. When you read a proxy log, you are seeing layer 7 (the URL). That is why both exist.</p>
+</section>
+
+<section id="tcp">
+  <h2>10. TCP, UDP, the handshake, and ports</h2>
+  <table>
+    <tr><th></th><th>TCP</th><th>UDP</th></tr>
+    <tr><td>Connection</td><td>Yes — 3-way handshake</td><td>No — just send</td></tr>
+    <tr><td>Reliability</td><td>Ack, order, retransmit</td><td>Best effort</td></tr>
+    <tr><td>Speed</td><td>Slower</td><td>Faster</td></tr>
+    <tr><td>Used for</td><td>Web, email, SSH, file transfer</td><td>DNS queries, video, VoIP, DHCP</td></tr>
+    <tr><td>Abuse</td><td>SYN flood, port scan</td><td>UDP flood, DNS amplification</td></tr>
+  </table>
+  <h3>TCP three-way handshake</h3>
+  <div class="diagram">
+    <div class="flow">
+      <span>Client → SYN</span>
+      <span class="arr">→</span>
+      <span>Server → SYN-ACK</span>
+      <span class="arr">→</span>
+      <span>Client → ACK</span>
+      <span class="arr">→</span>
+      <span>Connection is up. Data can flow.</span>
+    </div>
+    <p style="margin:12px 8px 4px;color:#8aa39a;">SYN flood: attacker sends many SYNs, never ACKs. Server holds half-open connections until it chokes. SYN scan: attacker uses incomplete handshakes to find open ports quietly.</p>
+  </div>
+  <h3>Ports every analyst must know</h3>
+  <table>
+    <tr><th>Port</th><th>Service</th><th>Why SOC cares</th></tr>
+    <tr><td>22</td><td>SSH</td><td>Admin access; brute-force magnet. Should not face the internet without tight control.</td></tr>
+    <tr><td>23</td><td>Telnet</td><td>Passwords in clear text. Should be off.</td></tr>
+    <tr><td>25 / 587</td><td>SMTP</td><td>Sending mail; spam/phish relays.</td></tr>
+    <tr><td>53</td><td>DNS</td><td>Name lookup; also tunnelling and C2.</td></tr>
+    <tr><td>80 / 443</td><td>HTTP / HTTPS</td><td>Web. Most C2 hides in 443 because it looks normal.</td></tr>
+    <tr><td>389 / 636</td><td>LDAP / LDAPS</td><td>Active Directory queries.</td></tr>
+    <tr><td>445</td><td>SMB</td><td>File shares; ransomware spread; EternalBlue.</td></tr>
+    <tr><td>3389</td><td>RDP</td><td>Remote desktop. Internet-exposed RDP is a classic ransomware door.</td></tr>
+    <tr><td>1433 / 3306</td><td>MSSQL / MySQL</td><td>Databases. Never on the public internet.</td></tr>
+    <tr><td>5985/5986</td><td>WinRM</td><td>Windows remote admin; lateral movement.</td></tr>
+  </table>
+  <p>ICMP (ping) is not a port; it is a protocol beside TCP/UDP, used for “are you there?” and sometimes reconnaissance.</p>
+</section>
+
+<section id="services">
+  <h2>11. DNS, HTTP, email, VPN — the services in the JD</h2>
+  <h3>DNS</h3>
+  <p>DNS translates names to IPs. Your laptop asks a DNS server: “what is mail.office.com?” and gets an IP. Attackers: (1) send you to a fake site (poisoning or look-alike domain), (2) hide stolen data inside DNS queries (<strong>DNS tunnelling</strong>), (3) use randomly generated domain names (<strong>DGA</strong>) so blockers cannot keep up. Suspicious: very long names, high query volume, brand-new domains, misspellings of microsoft.com.</p>
+  <h3>HTTP vs HTTPS</h3>
+  <p>HTTP is the web protocol (layer 7). HTTPS is HTTP inside TLS (encryption). Encryption protects confidentiality in transit — <span class="tag">Also in GRC</span> CIA — but it also hides malware downloads from a simple firewall. Companies use a proxy that decrypts, inspects, re-encrypts. As an analyst: proxy logs show the URL; raw firewall logs may only show IP:443.</p>
+  <h3>Email path (you will triage phishing)</h3>
+  <p>Internet → email security gateway (spam/phish/malware filter) → mailbox. <strong>SPF</strong> lists who may send for a domain. <strong>DKIM</strong> is a signature that the body was not altered. <strong>DMARC</strong> says what to do if SPF/DKIM fail. Failures do not always mean attack, but they are a clue.</p>
+  <h3>VPN</h3>
+  <p>A <strong>virtual private network</strong> encrypts traffic from a remote laptop into the office, as if the person sat on the floor. <strong>IPsec</strong> is common for site-to-site. <strong>SSL VPN</strong> is common for users (often port 443). Watch: failed logins, new country, impossible travel (Delhi at 14:00 and New York at 14:20), MFA fatigue (user hammered with approve-login prompts until they tap Yes).</p>
+  <p><strong>Split tunnel:</strong> only office traffic goes through the VPN; YouTube goes direct. Convenient, but that internet path is not inspected. Mention this if they ask VPN risks.</p>
+</section>
+
+<section id="firewall">
+  <h2>12. Firewalls and other network controls</h2>
+  <p>A <strong>firewall</strong> is a bouncer: allow or deny traffic by IP, port, protocol, and on next-gen firewalls also by application and user.</p>
+  <ul>
+    <li><strong>Stateless:</strong> each packet judged alone.</li>
+    <li><strong>Stateful:</strong> remembers connections. If you were allowed out, the reply is allowed back. This is the default mental model.</li>
+    <li><strong>Rule order:</strong> first match wins. Last rule should be deny-all.</li>
+    <li><strong>Watch outbound.</strong> Attackers who already got in must call home. Outbound to a rare IP on 443 at 3 a.m. is often more interesting than inbound noise.</li>
+    <li><strong>DMZ:</strong> a waiting room network for public servers, so a hacked website cannot walk straight into the claims database.</li>
+  </ul>
+  <table>
+    <tr><th>Control</th><th>Does</th><th>What you see</th></tr>
+    <tr><td>IDS</td><td>Detects, alerts, does not block</td><td>Signature/anomaly alerts</td></tr>
+    <tr><td>IPS</td><td>Detects and can block in-line</td><td>Blocked exploits. Mis-tune it and you block payroll.</td></tr>
+    <tr><td>Proxy / SWG</td><td>Users’ web path; filter + log</td><td>Who visited which URL</td></tr>
+    <tr><td>WAF</td><td>Protects web apps (SQLi, XSS)</td><td>App-layer attacks</td></tr>
+    <tr><td>NAC</td><td>Device must be healthy to join LAN</td><td>Rogue / non-compliant devices</td></tr>
+    <tr><td>DLP</td><td>Stops sensitive data leaving</td><td>Exfil attempts — <span class="tag">Also in GRC</span> classification</td></tr>
+  </table>
+  <p><strong>Allow-list vs block-list:</strong> allow-list = only approved, deny rest (strict). Block-list = deny known bad, allow rest (misses new evil). High-security prefers allow-list.</p>
+</section>
+
+<section id="secfund">
+  <h2>13. Information security fundamentals</h2>
+  <p><span class="tag">Also in GRC</span> If you already learned CIA in the GRC guide, reuse it. Here, attach a <em>log</em> to each letter.</p>
+  <table>
+    <tr><th></th><th>Meaning</th><th>SOC example</th></tr>
+    <tr><td>Confidentiality</td><td>Only the right people see it</td><td>Mailbox forwarding rule to a personal Gmail; DLP alert on a claims export</td></tr>
+    <tr><td>Integrity</td><td>Not changed in an unauthorised way</td><td>Database admin account runs unexpected UPDATE; file hash changes</td></tr>
+    <tr><td>Availability</td><td>Usable when needed</td><td>Ransomware, DDoS, disk full, someone disables the EDR service</td></tr>
+  </table>
+  <table>
+    <tr><th>Word</th><th>One line</th><th>Picture</th></tr>
+    <tr><td>Asset</td><td>What you protect</td><td>Claims DB, domain controller, CEO mailbox</td></tr>
+    <tr><td>Threat</td><td>Who/what can harm</td><td>Phishing crew, ransomware, careless staff</td></tr>
+    <tr><td>Vulnerability</td><td>Weakness</td><td>No MFA, unpatched VPN, open RDP</td></tr>
+    <tr><td>Exploit</td><td>Method that uses the weakness</td><td>Public CVE exploit</td></tr>
+    <tr><td>Zero-day</td><td>Flaw with no patch yet</td><td>You rely on behaviour detection, not signatures</td></tr>
+    <tr><td>Risk</td><td>Likelihood × impact</td><td>Internet RDP on a claims server = high</td></tr>
+    <tr><td>IOC</td><td>Clue the bad thing already happened</td><td>Malicious hash, IP, domain</td></tr>
+    <tr><td>IOA</td><td>Behaviour of an attack in progress</td><td>Office app spawning PowerShell</td></tr>
+    <tr><td>TTP</td><td>Tactics, techniques, procedures</td><td>How this group usually moves — hardest for them to change</td></tr>
+  </table>
+  <p><strong>Event vs alert vs incident</strong> — learn this cold:</p>
+  <div class="diagram">
+    <div class="flow">
+      <span>Event: any logged thing (a login)</span>
+      <span class="arr">→</span>
+      <span>Alert: a rule fired (50 failures)</span>
+      <span class="arr">→</span>
+      <span>Incident: we confirmed harm or real attack</span>
+    </div>
+  </div>
+  <p><strong>True/false positive/negative:</strong></p>
+  <ul>
+    <li>True positive — real attack, we caught it. Good.</li>
+    <li>False positive — harmless, we woke someone. Noise. Too many → <strong>alert fatigue</strong> → missed real alerts.</li>
+    <li>False negative — real attack, we missed it. Most dangerous.</li>
+    <li>True negative — harmless, correctly ignored.</li>
+  </ul>
+  <p><strong>Defence in depth:</strong> layers. Firewall + EDR + MFA + training + monitoring. One failure should not be game over. <strong>Least privilege</strong> and <strong>AAA</strong> (authentication, authorisation, accounting/logs) — same as GRC, but you will <em>watch the accounting</em>.</p>
+  <p><strong>Hash:</strong> a fingerprint of a file. Same file = same hash. Malware intel is often a list of hashes. Attackers change one byte to get a new hash, which is why behaviour beats hashes (Pyramid of Pain, later).</p>
+</section>
+
+<section id="sdlc">
+  <h2>14. Software engineering and SDLC — why a SOC interview asks this</h2>
+  <p>The JD does not say “write code.” The referrer still flagged <strong>software engineering / SDLC</strong> as a hot topic, and Xceedance builds and runs insurance applications. A CS graduate should sound fluent here.</p>
+  <p><strong>SDLC</strong> = Software Development Life Cycle. The steps a system takes from idea to retirement:</p>
+  <div class="diagram">
+    <div class="flow">
+      <span>1. Requirements</span>
+      <span class="arr">→</span>
+      <span>2. Design</span>
+      <span class="arr">→</span>
+      <span>3. Develop</span>
+      <span class="arr">→</span>
+      <span>4. Test</span>
+      <span class="arr">→</span>
+      <span>5. Deploy</span>
+      <span class="arr">→</span>
+      <span>6. Operate / maintain</span>
+      <span class="arr">→</span>
+      <span>7. Retire</span>
+    </div>
+  </div>
+  <p>Models: <strong>Waterfall</strong> (one pass, heavy docs), <strong>Agile</strong> (short sprints), <strong>DevOps</strong> (dev and ops as one loop). <strong>Secure SDLC / DevSecOps</strong> inserts security in every step, not as a panic at the end.</p>
+  <table>
+    <tr><th>Stage</th><th>Security activity</th><th>If skipped, SOC sees…</th></tr>
+    <tr><td>Requirements</td><td>What data is this? Who may access? Logging required?</td><td>App with no logs = blind spot</td></tr>
+    <tr><td>Design</td><td>Threat modelling, authn/z, encryption, network placement</td><td>Internet-facing admin page</td></tr>
+    <tr><td>Develop</td><td>Secure coding, secrets not in Git, code review</td><td>SQL injection, hardcoded passwords</td></tr>
+    <tr><td>Test</td><td>SAST (scan source), DAST (scan running app), pentest</td><td>Vulnerabilities arriving in your scanner as “critical, production”</td></tr>
+    <tr><td>Deploy</td><td>Change management, least privilege service accounts</td><td>A Friday deploy that breaks a detection rule or opens a port</td></tr>
+    <tr><td>Operate</td><td>Patching, monitoring, incident response — <em>this is you</em></td><td>Unpatched CVE, no owner</td></tr>
+  </table>
+  <div class="card ex">
+    <strong>Interview bridge from CS projects.</strong> “In college we had requirements, a database, a login page, and we deployed to a VM. We did not add MFA, we stored passwords badly, and we had almost no logs. In a company like Xceedance that would be a vulnerability ticket plus a monitoring gap. Secure SDLC is how you stop that before it reaches my SOC queue.”
+  </div>
+  <p><span class="tag">Also in GRC</span> Change management and access to production are classic GRC/audit controls. In SecOps you feel the failure as an alert or a missing log source.</p>
+</section>
+
+<section id="soc">
+  <h2>15. What a SOC is</h2>
+  <p><strong>SOC</strong> = Security Operations Center. A team + a room (or a virtual room) + tools + procedures, watching for attacks and responding. Levels:</p>
+  <ul>
+    <li><strong>L1 (this job):</strong> monitor, triage, document, escalate, simple containment per playbook.</li>
+    <li><strong>L2:</strong> deeper investigation, hunt, tune rules.</li>
+    <li><strong>L3 / IR:</strong> hard incidents, forensics, malware reverse engineering sometimes.</li>
+  </ul>
+  <p>You will be told: follow the <strong>playbook / runbook</strong>. That is a procedure. <span class="tag">Also in GRC</span> Policy says “we monitor.” The runbook says “if alert X, check Y, then do Z.” Your ticket is the record.</p>
+</section>
+
+<section id="event">
+  <h2>16. The pipeline in one picture</h2>
+  <div class="diagram">
+    <div class="flow">
+      <span>Systems create logs</span>
+      <span class="arr">→</span>
+      <span>SIEM collects + correlates</span>
+      <span class="arr">→</span>
+      <span>Rule fires = alert</span>
+      <span class="arr">→</span>
+      <span>You triage</span>
+      <span class="arr">→</span>
+      <span>False positive: close with reason</span>
+    </div>
+    <p style="margin:10px 8px 0;color:#8aa39a;">or → True positive → incident → contain → eradicate → recover → lessons → maybe tune the rule</p>
+  </div>
+</section>
+
+<section id="logs">
+  <h2>17. Logs — the raw material</h2>
+  <p>A <strong>log</strong> is a diary entry a system writes: time, who, what, from where, result. Monitoring is only as good as the logs. If a critical app does not log, you are flying blind.</p>
+  <p><strong>Always check time zones and NTP.</strong> Mixing IST and UTC is how people write impossible timelines.</p>
+  <p>Fields you look for in almost any log: timestamp, source IP/port, destination IP/port, protocol, user, host, action (allow/deny/success/fail), bytes, URL or process.</p>
+  <table>
+    <tr><th>Source</th><th>What it tells you</th></tr>
+    <tr><td>Firewall / VPN</td><td>Who connected where, allow/deny, geo</td></tr>
+    <tr><td>Windows events</td><td>Logons, new processes, account changes, PowerShell</td></tr>
+    <tr><td>Linux /var/log</td><td>SSH, sudo, syslog</td></tr>
+    <tr><td>DNS</td><td>Which host asked for which name</td></tr>
+    <tr><td>Proxy</td><td>Which user visited which URL</td></tr>
+    <tr><td>Email gateway</td><td>Sender, subject, attachment, verdict</td></tr>
+    <tr><td>EDR</td><td>Process tree, file, registry, network from the laptop</td></tr>
+    <tr><td>Identity (AD / Entra ID)</td><td>Sign-ins, MFA, group changes</td></tr>
+    <tr><td>Cloud (Azure/AWS)</td><td>Admin actions, resource changes</td></tr>
+    <tr><td>Application / database</td><td>Errors, injection, weird queries</td></tr>
+  </table>
+  <p><strong>Why centralise logs in a SIEM:</strong> an attacker who owns a laptop can delete local logs. Copies already sent to the SIEM remain. Also: one search box instead of ten consoles, and correlation across sources.</p>
+</section>
+
+<section id="windows">
+  <h2>18. Windows and Linux — only what L1 needs</h2>
+  <h3>Windows Event IDs worth memorising</h3>
+  <table>
+    <tr><th>ID</th><th>Meaning</th><th>Use</th></tr>
+    <tr><td>4624</td><td>Successful logon</td><td>Type 2 = keyboard, 3 = network, 10 = RDP</td></tr>
+    <tr><td>4625</td><td>Failed logon</td><td>Brute force / spray</td></tr>
+    <tr><td>4648</td><td>Logon with explicit credentials</td><td>Often lateral movement</td></tr>
+    <tr><td>4672</td><td>Special privileges</td><td>Admin-class logon</td></tr>
+    <tr><td>4688</td><td>New process</td><td>What ran; command line if enabled</td></tr>
+    <tr><td>4720</td><td>User created</td><td>Backdoor account</td></tr>
+    <tr><td>4732</td><td>User added to a group</td><td>Privilege escalation if the group is Domain Admins</td></tr>
+    <tr><td>4740</td><td>Lockout</td><td>Brute force side-effect</td></tr>
+    <tr><td>1102</td><td>Audit log cleared</td><td>Covering tracks. High priority</td></tr>
+    <tr><td>4104</td><td>PowerShell script block</td><td>Malicious scripts</td></tr>
+    <tr><td>7045 / 4697</td><td>Service installed</td><td>Persistence</td></tr>
+  </table>
+  <h3>Linux</h3>
+  <p><span class="mono">/var/log/auth.log</span> (Debian/Ubuntu) or <span class="mono">/var/log/secure</span> (RHEL): SSH logins, sudo. Failed SSH from one IP all night = brute force. Syslog severities 0–7: Emergency down to Debug. Syslog protocol often port 514, used to ship logs to SIEM.</p>
+</section>
+
+<section id="identity">
+  <h2>19. Identity, email, cloud — the JD named all three</h2>
+  <h3>Identity</h3>
+  <p><strong>Active Directory (AD)</strong> is the on-prem phone book of users, computers, and groups. <strong>Entra ID</strong> (formerly Azure AD) is the cloud identity for Microsoft 365. Attacks love identity: steal a password, you look like a real employee. Watch MFA failures, legacy protocols that skip MFA, consent to a shady app, new inbox rules, impossible travel.</p>
+  <h3>Email security</h3>
+  <p>Most first jobs’ first real incident is phishing. Gateway verdicts: deliver, junk, quarantine, block. Your work: was it phish, who received it, did anyone click, what happened on the endpoint after the click.</p>
+  <h3>Cloud basics</h3>
+  <p>Servers and apps may live in Azure/AWS, not only in the Gurugram server room. Shared responsibility: the cloud provider secures the building and the metal; Xceedance still must configure access, logging, encryption. SOC cares about: cloud admin logins, public storage buckets, new virtual machines, keys left in code. You do not need to be an Azure architect. You need: “cloud has logs; misconfiguration is a common vulnerability; identity is the new perimeter.”</p>
+</section>
+
+<section id="siem">
+  <h2>20. SIEM — Security Information and Event Management</h2>
+  <p>A SIEM is the brain of the SOC. It pulls logs from many places, puts them in a common shape, adds context, runs detection rules, raises alerts, and keeps history for investigations and for GRC/audit.</p>
+  <p>Names: Microsoft Sentinel, Splunk, QRadar, Elastic, ArcSight. Do not fake hands-on. Say “I understand the pipeline; I have practised the idea of queries; I will learn the house tool in week one.”</p>
+  <table>
+    <tr><th>Step</th><th>What happens</th></tr>
+    <tr><td>Collect</td><td>Agents, syslog, APIs</td></tr>
+    <tr><td>Normalise / parse</td><td>Different vendors → same field names (src_ip always means source IP)</td></tr>
+    <tr><td>Enrich</td><td>Geo-IP, threat intel, asset owner, “this is a domain controller”</td></tr>
+    <tr><td>Correlate</td><td>Failed logins + then success + then new admin = one story</td></tr>
+    <tr><td>Alert</td><td>Severity, assignee, playbook</td></tr>
+    <tr><td>Investigate</td><td>Search, pivot on user/host/IP</td></tr>
+    <tr><td>Retain / report</td><td>Forensics, metrics, compliance — <span class="tag">Also in GRC</span></td></tr>
+  </table>
+  <p><strong>Detection rule / use case:</strong> the logic. Example: “if 10 failed logons for one user in 5 minutes, alert.” <strong>Playbook:</strong> what the human (or SOAR) does next.</p>
+  <p>Use cases to name: brute force, password spray, impossible travel, success after failures, new admin, log cleared (1102), malware beaconing, big outbound transfer, port scan, suspicious PowerShell.</p>
+  <p>Sentinel uses <strong>KQL</strong>. Splunk uses <strong>SPL</strong>. One honest example is enough:</p>
+  <p class="mono">KQL: SigninLogs | where ResultType != 0 | summarize count() by UserPrincipalName</p>
+  <p class="mono">SPL: index=wineventlog EventCode=4625 | stats count by src_ip</p>
+  <p>Challenges: alert fatigue, missing log sources, cost of volume, stale rules. L1’s gift to the team is good false-positive notes so rules can be tuned.</p>
+</section>
+
+<section id="edr">
+  <h2>21. EDR, XDR, SOAR, and friends</h2>
+  <table>
+    <tr><th>Tool</th><th>One line</th></tr>
+    <tr><td>AV</td><td>Known malware by signature</td></tr>
+    <tr><td>EDR</td><td>Records endpoint behaviour; investigate; isolate host; kill process. Defender for Endpoint, CrowdStrike, SentinelOne</td></tr>
+    <tr><td>XDR</td><td>EDR plus email + identity + cloud in one vendor story</td></tr>
+    <tr><td>SIEM</td><td>Any log, any vendor, correlation + retention</td></tr>
+    <tr><td>SOAR</td><td>Automates repetitive steps (block IP, enrich hash) via playbooks</td></tr>
+    <tr><td>NDR</td><td>Watch the network traffic itself</td></tr>
+    <tr><td>UEBA</td><td>This user is acting unlike themselves</td></tr>
+    <tr><td>MDR</td><td>Someone else’s SOC watches for you</td></tr>
+  </table>
+  <p><strong>One-line comparison they love:</strong> EDR is deep on the laptop. XDR joins dots across laptop, mail, identity, cloud. SIEM takes everything, including weird sources, for search, correlation, and compliance. They complement; they are not rivals.</p>
+  <p>EDR response actions: isolate from network, kill process, quarantine file, collect investigation package. Isolation first if it might spread (ransomware).</p>
+</section>
+
+<section id="detect">
+  <h2>22. How detection works, MITRE, kill chain</h2>
+  <table>
+    <tr><th>Method</th><th>How</th><th>Weakness</th></tr>
+    <tr><td>Signature</td><td>Known hash / pattern</td><td>Misses new</td></tr>
+    <tr><td>Anomaly</td><td>Not like baseline</td><td>More false positives</td></tr>
+    <tr><td>Behaviour</td><td>What it does (mass encrypt)</td><td>Needs tuning</td></tr>
+    <tr><td>Threat intel</td><td>Known bad IP/domain/hash</td><td>IOCs expire</td></tr>
+  </table>
+  <h3>Cyber kill chain (Lockheed Martin)</h3>
+  <p>Reconnaissance → Weaponisation → Delivery → Exploitation → Installation → C2 → Actions on objectives. Detect early. Phishing is often Delivery. Your click-check is there.</p>
+  <h3>MITRE ATT&amp;CK</h3>
+  <p>A public encyclopedia of how attackers actually behave. <strong>Tactic</strong> = goal (Credential Access). <strong>Technique</strong> = how (brute force, OS credential dumping). SOC maps rules to techniques to see coverage holes. You do not memorise 200 techniques. You memorise the tactic names and two examples each:</p>
+  <p>Initial Access (phish) · Execution (PowerShell) · Persistence (new service) · Privilege Escalation · Defense Evasion (clear logs) · Credential Access · Discovery · Lateral Movement (RDP/SMB) · Collection / Exfiltration · Command and Control · Impact (ransomware).</p>
+  <h3>Pyramid of Pain</h3>
+  <p>Easy for attackers to change: file hash, IP, domain. Hard: their tools and TTPs. That is why “Word spawned PowerShell” beats “hash equals X.”</p>
+  <p><strong>Threat hunting:</strong> you search without waiting for an alert, from a hypothesis. That is usually L2. Know the word.</p>
+</section>
+
+<section id="triage">
+  <h2>23. Alert triage and incident response</h2>
+  <p>Say this list in the interview until it is muscle memory:</p>
+  <ol>
+    <li><strong>Validate</strong> — real or false positive? Read the rule. Check raw logs. Compare with normal.</li>
+    <li><strong>Scope</strong> — which user, host, IP? One or many?</li>
+    <li><strong>Enrich</strong> — VirusTotal / intel on hash, IP, domain. How critical is the asset?</li>
+    <li><strong>Prioritise</strong> — domain controller and CFO mailbox beat a test VM.</li>
+    <li><strong>Contain</strong> — isolate host, disable account, block IP, reset password — <em>per playbook and approval</em>. Do not freelance.</li>
+    <li><strong>Escalate or close</strong> — L2/manager with evidence; or close FP with a written reason.</li>
+    <li><strong>Improve</strong> — tell detection the rule is noisy.</li>
+  </ol>
+  <p><strong>NIST IR:</strong> Preparation → Detection &amp; Analysis → Containment, Eradication &amp; Recovery → Post-incident (lessons). SANS six: Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned. Same idea.</p>
+  <p><span class="tag">Also in GRC</span> If it is not written, it did not happen. Timeline, assets, log excerpts, IOCs, actions, status, next steps. Handover notes are how the morning shift does not redo your night.</p>
+  <h3>Phishing triage (practise this out loud)</h3>
+  <ol>
+    <li>Sender vs display name; look-alike domain.</li>
+    <li>Headers: SPF/DKIM/DMARC, Received chain. Do not click links; hover or sandbox.</li>
+    <li>Attachments in sandbox: macros, .iso, .lnk, <span class="mono">invoice.pdf.exe</span>.</li>
+    <li>Search other recipients; did anyone click or reply?</li>
+    <li>If clicked: EDR + proxy + DNS; reset credentials; isolate if needed.</li>
+    <li>Block sender/URL, purge mailboxes, document.</li>
+  </ol>
+</section>
+
+<section id="vuln">
+  <h2>24. Vulnerability management (it is in the JD)</h2>
+  <p>A <strong>vulnerability</strong> is a weakness. A <strong>scanner</strong> (Nessus, Qualys, Defender) finds missing patches, weak configs, open ports. <strong>CVE</strong> is a public ID for a known flaw. <strong>CVSS</strong> is a 0–10 severity score. High CVSS on an internet-facing host is urgent; high CVSS on an isolated lab machine can wait.</p>
+  <p>Your junior work: export the list, assign owners, chase dates, record exceptions (“cannot patch until 20 Oct because of a vendor freeze — compensating control: blocked at firewall”). <span class="tag">Also in GRC</span> Exceptions are accepted risk with an owner and an expiry. Do not silently close a critical vuln because someone said “later.”</p>
+  <p><strong>Patch vs configuration vs code vuln:</strong> missing Windows update; SMB exposed; SQL injection in an app. Different owners (IT, network, developers). SDLC should have caught the last one.</p>
+</section>
+
+<section id="attacks">
+  <h2>25. Attacks you must recognise in a log</h2>
+  <table>
+    <tr><th>Attack</th><th>What it is</th><th>What you would see</th></tr>
+    <tr><td>Brute force</td><td>Many passwords, one account</td><td>Many 4625, maybe 4740, then maybe 4624</td></tr>
+    <tr><td>Password spray</td><td>One password, many accounts</td><td>Few fails per user, many users, one IP</td></tr>
+    <tr><td>Phishing</td><td>Fake mail to steal or infect</td><td>Gateway alert, click in proxy, odd sign-in</td></tr>
+    <tr><td>Malware / ransomware</td><td>Evil software; encrypts files</td><td>EDR behaviour, mass renames, shadow copy delete, SMB to others</td></tr>
+    <tr><td>Port scan</td><td>Probing doors</td><td>One source, many dest ports</td></tr>
+    <tr><td>DoS / DDoS</td><td>Overwhelm</td><td>Traffic spike, SYNs, slowness</td></tr>
+    <tr><td>SQL injection / XSS</td><td>Abuse of app input</td><td>WAF, quotes in URL, DB errors</td></tr>
+    <tr><td>Lateral movement</td><td>Spread inside</td><td>RDP/SMB/WinRM between PCs, 4648</td></tr>
+    <tr><td>Exfiltration</td><td>Stealing data</td><td>Large outbound, cloud uploads off-hours</td></tr>
+    <tr><td>C2 beaconing</td><td>Regular call to attacker</td><td>Steady small connections to a rare domain</td></tr>
+    <tr><td>Insider</td><td>Misuse of real access</td><td>Bulk download, odd hours, other team’s files</td></tr>
+    <tr><td>Privilege escalation</td><td>Become admin</td><td>4732 to privileged group, 4672</td></tr>
+  </table>
+  <p><strong>Malware families in one breath:</strong> virus (needs a host file), worm (spreads itself), trojan (pretends to be useful), ransomware (encrypts for money), spyware, botnet (your PC in a herd). You do not need to reverse binaries. You need the behaviour in EDR.</p>
+</section>
+
+<section id="ifrs">
+  <h2>26. About IFRS 9, ECL, WoE and IV</h2>
+  <p>These lines appeared in the topic list: mapping model inputs to <strong>IFRS 9 / ECL</strong>, and ranking risk drivers with <strong>WoE</strong> and <strong>IV</strong> for a scorecard.</p>
+  <div class="card warn">
+    <strong>They are not Security Operations topics.</strong> They are credit-risk / finance-modelling topics. IFRS 9 is an accounting standard. ECL is Expected Credit Loss (how much a bank thinks it will lose on loans). WoE (Weight of Evidence) and IV (Information Value) are statistics used to pick variables for a credit scorecard. They are not in this JD and they are not in the monitoring notes.
+  </div>
+  <p>If they were mixed in from another role or another resume, do not study them for this interview. If an interviewer somehow asks “what is risk?” they mean cyber risk (threat × vulnerability × impact), not ECL.</p>
+  <p>If you ever need a 20-second honest answer: “Those are credit-risk modelling terms. This role is operational cyber. I use ‘risk’ here as likelihood and impact of a security event, tracked operationally and, on the GRC side, in a risk register.”</p>
+</section>
+
+<section id="intro">
+  <h2>27. How a CS graduate should introduce herself (this role)</h2>
+  <div class="card ex">
+    <p>“I am a B.Tech Computer Science graduate. I understand systems: people, process, data, software, and infrastructure working together. I have been preparing specifically for security operations — monitoring, logs, and incident triage — because I like technical investigation and clear documentation.</p>
+    <p>I know Xceedance delivers insurance operations and technology for global P&amp;C clients from Gurugram, so a compromised mailbox or laptop is a client-data problem, not only an IT problem. This role watches those systems around the clock.</p>
+    <p>I have taught myself the foundation: OSI and TCP/IP, DNS, HTTP, firewalls and VPN, CIA, event versus alert versus incident, what a SIEM and EDR are for, Windows logon events, phishing triage, and the NIST incident steps. I will follow playbooks, write precise tickets, escalate instead of guessing, and I am prepared for rotational night and weekend shifts. I am also interviewing later for the GRC associate role; I understand that team writes the rules and uses our tickets as evidence. Today I am here for the operations desk.”</p>
+  </div>
+</section>
+
+<section id="qa-company">
+  <h2>28. Interview questions — company and role</h2>
+
+  <details class="qa"><summary>What do you know about Xceedance?</summary>
+    <div class="a">
+      <p>Insurance-focused consulting, technology, and managed services, founded 2013, CEO Arun Balakrishnan. Global P&amp;C clients; Gurugram delivery at Candor TechSpace Sector 48. They handle underwriting, policy, claims (including TPA), actuarial, finance, and technology, so they hold sensitive client data. Security Operations exists to monitor and respond so that trust holds. Values include integrity and ownership.</p>
+      <div class="follow"><strong>Follow-up: Why does an insurance BPO need a SOC?</strong> Because they are a high-value third party. A phish in Gurugram can expose US policyholders. Clients contract for monitoring, ISO-style controls, and incident notice. SOC is how those promises operate at 2 a.m.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What does this Associate Analyst job do?</summary>
+    <div class="a">
+      <p>L1 security operations: watch approved tools, triage alerts using playbooks, collect logs, document, escalate true positives, help with containment when told, track vulnerabilities, keep tickets and handover notes clean, support endpoint/email/identity/cloud/network operations under supervision.</p>
+      <div class="follow"><strong>Follow-up: What will you not do on day one?</strong> I will not rewrite firewall rules, declare a major incident alone, or skip isolation approval. I follow the procedure and escalate.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>How is this different from the GRC role you are also interviewing for?</summary>
+    <div class="a">
+      <p>Same company, different sport. SecOps is live monitoring and response. GRC is governance, risk registers, audits, questionnaires. SOC tickets become GRC evidence. I am prepared for both interviews; this one is operational and shift-heavy.</p>
+      <div class="follow"><strong>Follow-up: Which do you actually want?</strong> Be honest. “I am open to both. I like investigation and I can also do structured documentation. If you need 24×7 coverage, I understand that is this seat.” Do not trash GRC.</div>
+    </div>
+  </details>
+</section>
+
+<section id="qa-fund">
+  <h2>29. Foundation questions (systems, info systems, security, SDLC)</h2>
+
+  <details class="qa"><summary>What is a system? What is an information system?</summary>
+    <div class="a">
+      <p>A system is parts working together for a purpose. An information system is how an organisation handles information: people, process, data, software, and hardware. Example: claims handlers + the claims procedure + policyholder data + the claims app + servers and laptops. I monitor those pieces through their logs.</p>
+      <div class="follow"><strong>Follow-up: Give a security failure in each of the five parts.</strong> People: click phish. Process: no leaver access removal. Data: unencrypted export. Software: SQL injection. Hardware: lost unencrypted laptop.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Explain the CIA triad with a monitoring example.</summary>
+    <div class="a">
+      <p>Confidentiality: only authorised eyes — DLP alert on a claims file to personal email. Integrity: unauthorised change — unexpected admin on a database. Availability: usable when needed — ransomware or a DDoS. Controls and detections map to these three. Same definition as in GRC; here I attach an alert.</p>
+      <div class="follow"><strong>Follow-up: Which letter is ransomware?</strong> Primarily availability (and often integrity of files). If they also steal data before encrypting, confidentiality too. Modern ransomware is often double extortion.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Threat vs vulnerability vs risk vs exploit.</summary>
+    <div class="a">
+      <p>Threat = source of harm. Vulnerability = weakness. Exploit = method that uses it. Risk = likelihood and impact of that happening to an asset. Unpatched internet VPN (vuln) with a public exploit, ransomware gangs (threat), claims access behind it (asset) = high risk.</p>
+      <div class="follow"><strong>Follow-up: What is residual risk?</strong> What remains after controls. MFA reduces account-takeover likelihood; phishing can still beat tired users. GRC records acceptance; SOC still watches the residual.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Event vs alert vs incident. True positive vs false positive.</summary>
+    <div class="a">
+      <p>Event = logged activity. Alert = a detection rule matched. Incident = confirmed security issue we must handle. True positive = real bad, correctly flagged. False positive = harmless, flagged. False negative = real bad, missed — worst. Too many false positives cause alert fatigue, which then causes false negatives.</p>
+      <div class="follow"><strong>Follow-up: An admin running a vulnerability scan triggered IPS. What is it?</strong> Likely a false positive or at least expected activity. I check change tickets / scan window, then close with reason or tune, not escalate as an APT.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is SDLC and where does security fit? Why should SOC care?</summary>
+    <div class="a">
+      <p>Software Development Life Cycle: requirements, design, develop, test, deploy, operate, retire. Secure SDLC adds threat modelling, secure coding, SAST/DAST, least privilege, logging. If developers ship an app with no logs or a default password, it becomes my blind spot or my critical vulnerability ticket. Change without telling SOC can break detections.</p>
+      <div class="follow"><strong>Follow-up: SAST vs DAST?</strong> SAST reads source without running it. DAST attacks a running app from outside. Both catch different issues. Pentest is a human-led cousin of DAST, usually periodic.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Least privilege, AAA, defence in depth.</summary>
+    <div class="a">
+      <p>Least privilege: minimum access for the job. AAA: authenticate who you are, authorise what you may do, account (log) what you did. Defence in depth: several layers so one failure is not fatal — firewall, EDR, MFA, training, monitoring. I watch the accounting layer.</p>
+      <div class="follow"><strong>Follow-up: How does this show up in a log?</strong> 4624 is authentication success. A denied file access is authorisation. 4688 with a command line is accounting of execution.</div>
+    </div>
+  </details>
+</section>
+
+<section id="qa-net">
+  <h2>30. Networking questions (they will live here)</h2>
+
+  <details class="qa"><summary>Explain the OSI model.</summary>
+    <div class="a">
+      <p>Seven layers, bottom up: Physical, Data Link, Network, Transport, Session, Presentation, Application. Please Do Not Throw Sausage Pizza Away. IP sits at 3, TCP/UDP at 4, TLS at 6, HTTP/DNS/SMTP at 7. I use it to know whether I am looking at a cable problem, a MAC/ARP issue, an IP route, a port, or an application URL.</p>
+      <div class="follow"><strong>Follow-up: Where does a firewall work? A proxy? TLS?</strong> Traditional firewall: 3–4 (and NGFW up to 7). Proxy/WAF: 7. TLS: 6. DNS: 7 using UDP/TCP 53 at layer 4.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>TCP vs UDP. Three-way handshake.</summary>
+    <div class="a">
+      <p>TCP is connection-oriented and reliable: SYN, SYN-ACK, ACK, then data with retransmission. UDP is connectionless and fast, no guarantee — DNS queries, streaming. Handshake abuse: SYN flood (many SYNs, no ACK) and half-open scans.</p>
+      <div class="follow"><strong>Follow-up: Why is HTTPS over TCP 443?</strong> The browser needs reliable, ordered bytes for a web page; TLS then encrypts that stream. UDP is used by some modern HTTP/3 (QUIC), but the classic answer is TCP/443.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is DNS and how do attackers abuse it?</summary>
+    <div class="a">
+      <p>DNS maps names to IPs. Abuse: look-alike domains in phishing, DNS tunnelling to hide data, DGA for C2, flooding. I would look at volume, length/randomness of names, rarity of the domain, and which host is querying.</p>
+      <div class="follow"><strong>Follow-up: Why do we log DNS?</strong> Firewall may only show an IP. DNS tells me the name the malware asked for, which intel can match, and it survives even when HTTPS payload is encrypted.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Private vs public IP. What is NAT? Why DHCP logs?</summary>
+    <div class="a">
+      <p>Private: 10/8, 172.16/12, 192.168/16 — not routed on the public internet. NAT translates many private hosts to a public IP. DHCP assigns the private IP. Without DHCP and NAT logs I cannot map a public IP seen by a client back to a Gurugram laptop at 21:07.</p>
+      <div class="follow"><strong>Follow-up: Is 8.8.8.8 private?</strong> No. Google DNS, public. A host talking to it is doing DNS (or using it as a forwarder), which can be normal — context matters.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Stateful vs stateless firewall. IDS vs IPS. Allow-list vs block-list.</summary>
+    <div class="a">
+      <p>Stateless: each packet alone. Stateful: tracks connections so replies to allowed outbound are permitted. IDS alerts only. IPS sits in-line and can block — stronger, but a bad rule outages the business. Allow-list default-deny is stricter; block-list default-allow misses unknowns.</p>
+      <div class="follow"><strong>Follow-up: Why watch outbound more than inbound?</strong> Perimeter inbound is noisy and often already blocked. Compromised internals must call out. Outbound to a rare IP is a classic C2 tell.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is a VPN and what do you monitor?</summary>
+    <div class="a">
+      <p>Encrypted tunnel into the corporate network. Monitor failures, successes from new countries, impossible travel, odd hours, multiple sessions, MFA fatigue. Split tunnelling is a risk because internet traffic bypasses inspection.</p>
+      <div class="follow"><strong>Follow-up: IPsec vs SSL VPN?</strong> IPsec often site-to-site, network layer, ports 500/4500. SSL VPN often remote users, TLS, port 443, easier through firewalls.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>List important ports and why they matter.</summary>
+    <div class="a">
+      <p>22 SSH brute force; 53 DNS; 80/443 web and hidden C2; 445 SMB ransomware; 3389 RDP; 1433/3306 databases should not be public; 389 LDAP. Seeing 3389 from the internet to a claims server is an emergency-level vulnerability, not a trivia fact.</p>
+      <div class="follow"><strong>Follow-up: Port 445 between two workstations at 3 a.m.?</strong> Could be backup — or lateral movement / ransomware. Check process (EDR), user, whether it is admin share, and whether an alert already exists.</div>
+    </div>
+  </details>
+</section>
+
+<section id="qa-soc">
+  <h2>31. SIEM, EDR, detection questions</h2>
+
+  <details class="qa"><summary>What is a SIEM and why do we need it?</summary>
+    <div class="a">
+      <p>It collects and normalises logs, enriches and correlates them, alerts, supports investigation, and retains data. Without it I would check ten consoles and miss a story that spans VPN + mailbox + endpoint. It also keeps copies attackers cannot wipe locally, which GRC later uses as evidence.</p>
+      <div class="follow"><strong>Follow-up: Sentinel vs Splunk?</strong> Same job, different vendors. Sentinel is Azure-native, KQL, Logic App playbooks. Splunk is SPL, forwarders/indexers/search heads. I will learn whichever Xceedance runs. I will not pretend I am certified on it.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>EDR vs XDR vs SIEM.</summary>
+    <div class="a">
+      <p>EDR: deep endpoint telemetry and response (isolate, kill). XDR: correlates endpoint with email, identity, cloud in one ecosystem. SIEM: any source, long retention, custom correlation, compliance. They work together.</p>
+      <div class="follow"><strong>Follow-up: What would you do on a compromised laptop in EDR?</strong> Isolate first if spread is a risk, kill/quarantine per playbook, collect evidence, reset credentials, ticket, escalate. Do not power off unless told — you may lose memory evidence.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is MITRE ATT&amp;CK? Kill chain? Pyramid of Pain?</summary>
+    <div class="a">
+      <p>ATT&amp;CK: catalogue of real attacker tactics and techniques; we map detections to find gaps. Kill chain: recon through actions on objectives; break it early. Pyramid of Pain: hashes are easy for attackers to change; TTPs are hard — prefer behavioural detections.</p>
+      <div class="follow"><strong>Follow-up: Map phishing to ATT&amp;CK.</strong> Initial Access: phishing. If they steal the password: Credential Access. If they run a macro: Execution. If Word launches PowerShell: Execution + maybe Defense Evasion. If they RDP onward: Lateral Movement.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>IOC vs IOA.</summary>
+    <div class="a">
+      <p>IOC = evidence something already happened (hash, IP). IOA = behaviour of an attack in progress (Office spawning PowerShell). IOAs survive when the hash changes.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Name Windows Event IDs you would actually use.</summary>
+    <div class="a">
+      <p>4624 success, 4625 fail, 4648 explicit creds, 4672 admin logon, 4688 process create, 4720 new user, 4732 group add, 4740 lockout, 1102 log cleared — 1102 is urgent — 4104 PowerShell, 7045 new service.</p>
+      <div class="follow"><strong>Follow-up: Logon type 10 vs 2?</strong> 2 = at the keyboard. 10 = RDP. A type 10 from a workstation to a workstation off-hours is a lateral-movement question.</div>
+    </div>
+  </details>
+</section>
+
+<section id="qa-scenario">
+  <h2>32. Scenario questions — this is the job</h2>
+
+  <details class="qa"><summary>You see many failed logins. Walk me through it.</summary>
+    <div class="a">
+      <p>Source IP internal or external? One account (brute force) or many (spray)? Did a success follow? Geo, time, MFA result. If success: treat as possible compromise — disable or reset per playbook, review mailbox rules and sign-ins, check EDR, ticket as incident, escalate. If only failures and we blocked them: document, maybe block IP, watch.</p>
+      <div class="follow"><strong>Follow-up: The user says it was them, they forgot the password.</strong> Still match source IP to their usual location/device. If it matches, close as true benign with notes. If it does not, do not take the user’s first story as proof.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Walk through a phishing alert.</summary>
+    <div class="a">
+      <p>Sender, headers, SPF/DKIM/DMARC, links in sandbox not in my browser, attachments in sandbox, other recipients, clickers. Clickers: EDR process tree, proxy, DNS, isolate if needed, reset creds, purge mail, block indicators, write the timeline in UTC.</p>
+      <div class="follow"><strong>Follow-up: Headers look fine, but the PDF has a macro.</strong> Delivery authenticity is not payload safety. Treat as malware delivery. Gateway miss = true positive for the attachment path. Escalate if execution happened.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>EDR: WINWORD.EXE spawned powershell.exe with an encoded command.</summary>
+    <div class="a">
+      <p>This is a classic IOA. I would not wait. Check process tree, user, command line (decode if the playbook allows), network connections, file writes. Isolate the host if ransomware/spread risk. Disable user if credential theft likely. Pull SIEM for the same host/user. Escalate L2. Do not run the PowerShell myself to “see what it does.”</p>
+      <div class="follow"><strong>Follow-up: It was an internal admin macro tool.</strong> Then it may be a false positive — I still want a change record or allow-list request, not a silent close. I ask L2/detection to tune with a tight exception.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>A user says the laptop is “acting strangely.”</summary>
+    <div class="a">
+      <p>Ask what changed (email, USB, pop-up). Check EDR alerts, process tree, recent network, proxy downloads. Signs of compromise: isolate, collect, reset credentials, scan, ticket, do not let them keep working on a maybe-ransomware box. Stay calm; they will copy your tone.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Vulnerability scan: critical CVE on an internet-facing server, owner not patching.</summary>
+    <div class="a">
+      <p>Confirm it is really internet-facing and the CVE is exploitable. Open/track the ticket with due date. If overdue, escalate to the owner’s manager and SecOps lead. Compensating control (firewall block, WAF) can buy time but is not a silent close. Record exception only if an authorised person accepts residual risk with an expiry — that is the GRC overlap.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Alert 1102: audit log cleared on a server.</summary>
+    <div class="a">
+      <p>High priority. Attackers cover tracks this way. Check who did it, from where, what happened in the minutes before (new admin, unusual process). If expected (a documented tool), still verify. If not, incident, isolate if appropriate, escalate immediately. SIEM copy of older logs may still exist — that is why we forward.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>You are not sure if it is real and the queue is full.</summary>
+    <div class="a">
+      <p>I do not guess. I write what I have, mark severity using the matrix, escalate “needs L2 eyes” rather than close. Closing a maybe-true-positive to clear a queue is how breaches are missed. I would rather have a slow ticket than a false negative.</p>
+    </div>
+  </details>
+</section>
+
+<section id="qa-behave">
+  <h2>33. Behavioural, shifts, HR</h2>
+
+  <details class="qa"><summary>Tell me about yourself.</summary>
+    <div class="a"><p>Use the script in section 27. End on this role, shifts, and that you will not bluff on an alert.</p></div>
+  </details>
+
+  <details class="qa"><summary>This includes night shifts, weekends, public holidays. Are you sure?</summary>
+    <div class="a">
+      <p>Yes. Security operations is a coverage job for US/UK clients. I have thought about commute, sleep, and family. I will be reliable on the roster, not only willing in an interview. Handover quality matters more at 06:00, and I will write for the next person.</p>
+      <div class="follow"><strong>Follow-up: What if you fall ill mid-shift?</strong> Tell the lead early, write a partial handover, do not disappear from the queue. Coverage is a team property.</div>
+    </div>
+  </details>
+
+  <details class="qa"><summary>How do you stay calm when something looks like ransomware?</summary>
+    <div class="a">
+      <p>Playbook first, not adrenaline. Isolate if the procedure says isolate. Do not start random troubleshooting that destroys evidence. Communicate facts: what host, what we saw, what we did, what we need. Panic is contagious; accuracy is the control.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>A colleague asks you to close their noisy alerts as false positives without checking.</summary>
+    <div class="a">
+      <p>No. Integrity is in the JD. I can help them investigate, I will not fake closures. That is also a GRC problem: false metrics and missing incidents.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Why should we hire a CS graduate with no SOC internship?</summary>
+    <div class="a">
+      <p>The JD allows CS and 0–1 years. I have built the foundation against your list: networking, Windows/Linux ideas, monitoring concepts, IR steps, vulnerability tracking, documentation. CS helps me understand processes, logs, and SDLC gaps. I follow procedures, I write clearly, I escalate instead of inventing. I am shift-ready. I will learn the house SIEM in the lab you give me.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Salary / joining / other offer (GRC too).</summary>
+    <div class="a">
+      <p>I am in process for both Xceedance associate roles. I will be transparent if dates collide. For pay: entry-level Gurugram specialist band, I will listen to the offer. I will not invent a competing number. I can join as per my notice or immediately if that is my situation — tell the truth.</p>
+    </div>
+  </details>
+</section>
+
+<section id="ask">
+  <h2>34. Questions you should ask them</h2>
+  <ol>
+    <li>Which SIEM and EDR are in production, and what does week-one training look like for L1?</li>
+    <li>How is the shift roster built (nights, weekends), and how is handover done?</li>
+    <li>What does a good first six months look like on this desk?</li>
+    <li>How do SecOps and GRC hand work to each other after an incident?</li>
+    <li>What is the split of work: monitoring vs vulnerability tracking vs client-facing tickets?</li>
+    <li>Which playbooks would I live in first — phishing, failed logins, malware?</li>
+  </ol>
+</section>
+
+<section id="mistakes">
+  <h2>35. Mistakes that fail this interview</h2>
+  <div class="card bad">
+    <ul>
+      <li>Mixing this job with GRC (“I will write the ISO policy on night shift”).</li>
+      <li>Claiming you “used Splunk in production” when you watched a YouTube video.</li>
+      <li>Cannot draw OSI or explain a port.</li>
+      <li>Saying “I will make risk zero” or “I will hack back.”</li>
+      <li>Clicking a phishing link in the hypothetical to “check it.”</li>
+      <li>Closing alerts to clear the queue.</li>
+      <li>Hedging on night shifts when the JD is blunt.</li>
+      <li>Memorising 20 tool logos and failing “what is a log?”</li>
+      <li>Dumping MITRE tactic lists with no example.</li>
+      <li>Studying IFRS 9 for this interview.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="cheat">
+  <h2>36. Cheat sheet — morning of the interview</h2>
+  <div class="card">
+    <p><strong>Company:</strong> Xceedance, insurance services, Gurugram SEZ, client data, 24×7 monitoring needed.</p>
+    <p><strong>Job:</strong> L1 SOC. Alerts, logs, triage, tickets, handover, vulns, follow playbooks. Nights/weekends.</p>
+    <p><strong>System:</strong> parts with a purpose. <strong>Information system:</strong> people, process, data, software, hardware.</p>
+    <p><strong>OSI:</strong> PDNTSPA — Physical, Data Link, Network, Transport, Session, Presentation, Application.</p>
+    <p><strong>TCP:</strong> SYN / SYN-ACK / ACK. <strong>UDP:</strong> no handshake. <strong>Ports:</strong> 22, 53, 80/443, 445, 3389.</p>
+    <p><strong>Private IP:</strong> 10/8, 172.16/12, 192.168/16. NAT hides many internals behind one public IP.</p>
+    <p><strong>CIA:</strong> Confidentiality, Integrity, Availability. <strong>Risk:</strong> threat × vuln × impact.</p>
+    <p><strong>Event → Alert → Incident.</strong> FN worse than FP; FPs cause fatigue.</p>
+    <p><strong>SIEM:</strong> collect, normalise, enrich, correlate, alert, investigate, retain.</p>
+    <p><strong>EDR / XDR / SIEM:</strong> endpoint depth / cross-domain / all logs.</p>
+    <p><strong>Windows:</strong> 4624/4625, 4648, 4688, 4732, 1102.</p>
+    <p><strong>Email:</strong> SPF, DKIM, DMARC. Sandbox links. Never click live.</p>
+    <p><strong>IR:</strong> Prepare → Detect/Analyse → Contain/Eradicate/Recover → Lessons.</p>
+    <p><strong>Triage:</strong> Validate, scope, enrich, prioritise, contain, escalate/close, tune.</p>
+    <p><strong>SDLC:</strong> req → design → build → test → deploy → operate. No logs = SOC blind.</p>
+    <p><strong>Golden sentence:</strong> “I will follow the playbook, write the evidence, and escalate rather than guess.”</p>
+  </div>
+  <h3>Practice after the interview, or the night before if you have energy</h3>
+  <ul>
+    <li>TryHackMe SOC Level 1 (free rooms exist)</li>
+    <li>Microsoft Learn SC-900 / Sentinel intro</li>
+    <li>LetsDefend or Blue Team Labs one phishing case</li>
+    <li>Draw OSI from memory on paper</li>
+  </ul>
+  <p><a href="home.html">Back to both guides</a> · <a href="index.html">GRC guide (unchanged)</a></p>
+</section>
+
+<footer>
+  <p>Teaching guide for Associate Analyst, Security Operations, Xceedance Gurugram. Built from the job description and rewritten from a dense monitoring note so a CS graduate can learn from zero. Company facts from public Xceedance materials. The GRC guide on this site was not edited. Not an official Xceedance document. Not legal or certification advice.</p>
+</footer>
+</main>
+</div>
+<script>
+  function filterPage(v) {
+    v = (v || "").toLowerCase().trim();
+    document.querySelectorAll("main section").forEach(sec => {
+      sec.style.display = !v || sec.innerText.toLowerCase().includes(v) ? "" : "none";
+    });
+  }
+  const links = [...document.querySelectorAll("nav a.t")];
+  const secs = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + e.target.id));
+    });
+  }, { rootMargin: "-20% 0px -70% 0px" });
+  secs.forEach(s => io.observe(s));
+</script>
+</body>
+</html>
