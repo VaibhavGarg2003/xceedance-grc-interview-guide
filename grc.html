@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xceedance GRC Interview Guide — Associate Analyst, Information Security</title>
+<meta name="description" content="A teaching-first interview guide for Xceedance Gurugram Associate Analyst — Information Security GRC. Written for a B.Tech Computer Science graduate with no security background.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --muted: #5c564e;
+    --line: #e4ddd3;
+    --paper: #f6f1e8;
+    --card: #fffcf7;
+    --navy: #10243a;
+    --navy-2: #17324f;
+    --teal: #1b6f63;
+    --teal-d: #14574d;
+    --gold: #b7791f;
+    --warn: #8a3b16;
+    --ok: #1f6b3a;
+    --chip: #eef4f2;
+    --shadow: 0 10px 30px rgba(16, 36, 58, .08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.65;
+  }
+  a { color: var(--teal-d); }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+  .wrap { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+  nav {
+    position: sticky; top: 0; height: 100vh; overflow: auto;
+    background: var(--navy); color: #e8efe9; padding: 22px 16px 40px;
+  }
+  nav h1 { font-family: Fraunces, Georgia, serif; font-size: 1.05rem; line-height: 1.3; margin: 0 0 6px; color: #fff; }
+  nav p { margin: 0 0 18px; color: #b7c4c0; font-size: .82rem; }
+  nav input {
+    width: 100%; padding: 9px 10px; border: 0; border-radius: 8px;
+    background: #1c3a58; color: #fff; margin-bottom: 14px;
+  }
+  nav a { display: block; color: #c9d6d1; text-decoration: none; font-size: .86rem; padding: 5px 8px; border-radius: 6px; }
+  nav a:hover, nav a.active { background: #1c3a58; color: #fff; }
+  nav .g { margin: 14px 0 6px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: #8aa39a; }
+  nav .switch { display: flex; gap: 6px; margin-bottom: 14px; }
+  nav .switch a { flex: 1; text-align: center; background: #1c3a58; color: #fff; padding: 7px 6px; border-radius: 8px; font-size: .75rem; font-weight: 650; text-decoration: none; }
+  nav .switch a.on { background: #1b6f63; color: #fff; }
+  nav .switch a:hover { background: #245a7a; color: #fff; }
+  nav .switch a.on:hover { background: #1b6f63; }
+  main { padding: 28px 8vw 80px; max-width: 980px; }
+  .hero {
+    background: linear-gradient(145deg, var(--navy), var(--navy-2) 55%, #1b6f63);
+    color: #fff; border-radius: 18px; padding: 36px 32px; margin-bottom: 28px; box-shadow: var(--shadow);
+  }
+  .hero .kicker { letter-spacing: .12em; text-transform: uppercase; font-size: .75rem; color: #c9e6df; }
+  .hero h2 { font-family: Fraunces, Georgia, serif; font-weight: 650; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15; margin: 8px 0 12px; }
+  .hero p { color: #dce7e3; margin: 0 0 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); color: #fff; padding: 5px 10px; border-radius: 999px; font-size: .8rem; }
+  h2, h3, h4 { font-family: Fraunces, Georgia, serif; letter-spacing: -.01em; }
+  h2 { font-size: 1.85rem; margin: 2.2rem 0 .6rem; color: var(--navy); }
+  h3 { font-size: 1.3rem; margin: 1.6rem 0 .45rem; color: var(--navy-2); }
+  h4 { font-size: 1.05rem; margin: 1.2rem 0 .3rem; }
+  section { margin-bottom: 8px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 20px; margin: 14px 0; box-shadow: 0 1px 0 rgba(255,255,255,.7) inset;
+  }
+  .callout { border-left: 4px solid var(--teal); padding-left: 14px; }
+  .warn { border-left: 4px solid var(--gold); }
+  .ex { background: #eef6f3; border: 1px solid #d5e8e2; }
+  .bad { background: #fbf1ea; border: 1px solid #f0d7c7; }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; margin: 12px 0 18px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #efe8db; font-weight: 650; }
+  ul, ol { padding-left: 1.2rem; }
+  li { margin: .28rem 0; }
+  .qa { border: 1px solid var(--line); border-radius: 12px; background: var(--card); margin: 10px 0; overflow: hidden; }
+  .qa summary { cursor: pointer; padding: 12px 16px; font-weight: 650; color: var(--navy); list-style: none; }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary:before { content: "Q  "; color: var(--teal); font-family: Fraunces, serif; }
+  .qa[open] summary { border-bottom: 1px solid var(--line); background: #f3eee5; }
+  .qa .a { padding: 12px 16px 16px; }
+  .qa .a:before { content: "Answer"; display: block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; font-weight: 700; }
+  .why { font-size: .92rem; color: var(--muted); margin-top: 8px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 980px) {
+    .wrap { grid-template-columns: 1fr; }
+    nav { position: relative; height: auto; }
+    .grid { grid-template-columns: 1fr; }
+    main { padding: 20px 18px 60px; }
+  }
+  .toc-mini a { display: inline-block; margin: 0 10px 8px 0; }
+  footer { color: var(--muted); font-size: .85rem; margin-top: 40px; }
+  .tag { display: inline-block; background: var(--chip); color: var(--teal-d); font-size: .75rem; font-weight: 650; padding: 2px 8px; border-radius: 999px; margin-right: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav id="toc">
+  <div class="switch">
+    <a href="/xceedance-grc-interview-guide/">Both guides</a>
+    <a href="/xceedance-grc-interview-guide/secops.html">SecOps</a>
+    <a class="on" href="/xceedance-grc-interview-guide/grc.html">GRC</a>
+  </div>
+  <h1>Xceedance GRC Interview Guide</h1>
+  <p>Associate Analyst · Information Security GRC · Gurugram</p>
+  <input id="q" type="search" placeholder="Search this page…" oninput="filterPage(this.value)">
+  <div class="g">Start here</div>
+  <a href="#how">How to use this guide</a>
+  <a href="#plan">Study plan</a>
+  <div class="g">Company and role</div>
+  <a href="#company">Xceedance research</a>
+  <a href="#why-grc">Why this team exists</a>
+  <a href="#jd">Job description decoded</a>
+  <a href="#day">A week in this job</a>
+  <div class="g">Teach first — basics</div>
+  <a href="#not-hacking">This is not hacking</a>
+  <a href="#info">What is information security</a>
+  <a href="#cia">CIA triad</a>
+  <a href="#tvr">Threat, vulnerability, risk</a>
+  <a href="#grc">What GRC means</a>
+  <a href="#gov">Governance documents</a>
+  <a href="#risk">Risk management</a>
+  <a href="#controls">Controls</a>
+  <a href="#audit">Audit and evidence</a>
+  <div class="g">Frameworks named in the JD</div>
+  <a href="#iso">ISO/IEC 27001</a>
+  <a href="#nist">NIST Cybersecurity Framework</a>
+  <a href="#soc2">SOC 2</a>
+  <a href="#privacy">Privacy principles</a>
+  <a href="#bcp">Business continuity</a>
+  <div class="g">Daily GRC work</div>
+  <a href="#class">Data classification</a>
+  <a href="#access">Access control</a>
+  <a href="#tprm">Third-party risk</a>
+  <a href="#aware">Security awareness</a>
+  <a href="#rfi">Questionnaires and RFIs</a>
+  <a href="#excel">Excel, Word, PowerPoint</a>
+  <a href="#ins">Insurance 101 for this role</a>
+  <div class="g">Then interview</div>
+  <a href="#intro">How to introduce yourself</a>
+  <a href="#qa-company">Company questions</a>
+  <a href="#qa-basics">Basics questions</a>
+  <a href="#qa-frameworks">Framework questions</a>
+  <a href="#qa-work">Work-scenario questions</a>
+  <a href="#qa-behave">Behavioural questions</a>
+  <a href="#qa-hr">HR, shifts, location</a>
+  <a href="#ask">Questions you should ask</a>
+  <a href="#mistakes">Mistakes to avoid</a>
+  <a href="#cheat">One-page cheat sheet</a>
+</nav>
+<main>
+<header class="hero">
+  <div class="kicker">Interview preparation · teaching first</div>
+  <h2>Associate Analyst — Information Security GRC at Xceedance, Gurugram</h2>
+  <p>This page is written for a B.Tech Computer Science graduate who has never studied information security. It teaches the job in plain English, with insurance-company examples, and only then gives interview questions with full answers.</p>
+  <p>The recruiter and hiring manager sent this job description. There is a referral. The interview will still test whether you understand the work. They are hiring a junior who can learn, write clearly, keep secrets, and follow a process — not a hacker.</p>
+  <div class="chips">
+    <span class="chip">0–1 year · fresher OK</span>
+    <span class="chip">Work from office · Gurugram</span>
+    <span class="chip">Shifts for international clients</span>
+    <span class="chip">ISO 27001 · NIST CSF · SOC 2</span>
+    <span class="chip">Policies, risk, audit, vendors, awareness</span>
+  </div>
+</header>
+
+<section id="how">
+  <h2>How to use this guide</h2>
+  <p>Read it in order. Do not jump to interview questions first. If you memorise answers without the basics, a manager will notice in the second follow-up question.</p>
+  <ol>
+    <li>Read the company and role sections once, slowly. You must be able to say what Xceedance does in 30 seconds.</li>
+    <li>Read every teaching chapter. After each chapter, close the page and explain the idea out loud to an empty room, using your own example.</li>
+    <li>Only then open the interview questions. Read the question, answer it yourself, then open the model answer.</li>
+    <li>On the last day, do a mock interview: 45 minutes, no notes, with a friend asking from the question list.</li>
+  </ol>
+  <div class="card callout">
+    <strong>The one sentence this job is about.</strong>
+    Xceedance handles sensitive insurance data for clients in the US, UK, Europe and Asia. Those clients will only give Xceedance that work if Xceedance can prove it is a trustworthy, well-governed company. GRC is the team that writes the rules, tracks the risks, collects the proof, and answers the clients.
+  </div>
+</section>
+
+<section id="plan">
+  <h2>Study plan (basics first)</h2>
+  <p>If you have about a week, use Plan A. If you have two weeks, use Plan B. Do not try to become an ISO 27001 Lead Auditor. The JD asks for <em>foundational knowledge</em>.</p>
+  <h3>Plan A — 7 days</h3>
+  <table>
+    <tr><th>Day</th><th>What to master</th><th>How you know you are ready</th></tr>
+    <tr><td>1</td><td>Xceedance + this role + “this is not hacking”</td><td>You can explain the company and the job to a parent in 2 minutes.</td></tr>
+    <tr><td>2</td><td>CIA triad, threat vs vulnerability vs risk</td><td>You can take any news story (“laptop stolen”) and name C, I, A, threat, vulnerability, risk.</td></tr>
+    <tr><td>3</td><td>GRC, policy vs standard vs procedure, controls</td><td>You can sort 8 sample documents into the right bucket.</td></tr>
+    <tr><td>4</td><td>Risk register, likelihood × impact, treatment options</td><td>You can fill a 5-row dummy risk register in Excel.</td></tr>
+    <tr><td>5</td><td>ISO 27001 + NIST CSF at story level</td><td>You can say what each is for, and how they differ, without jargon soup.</td></tr>
+    <tr><td>6</td><td>SOC 2, privacy, BCP, access control, vendor risk, awareness, audit evidence</td><td>You can walk through “a client questionnaire arrived” end to end.</td></tr>
+    <tr><td>7</td><td>Interview answers + mock + questions to ask them</td><td>You can do 45 minutes without freezing.</td></tr>
+  </table>
+  <h3>Plan B — 14 days (same topics, more practice)</h3>
+  <p>Days 1–7 as above, but slower. Days 8–10: rebuild a mini ISMS on paper for a fictional 50-person claims team (5 policies, 10 risks, 10 controls, evidence list). Days 11–12: Excel (filters, VLOOKUP/XLOOKUP, pivot, conditional formatting) and a one-page status dashboard in PowerPoint. Days 13–14: mock interviews, including “you have no security degree — why you?”</p>
+  <div class="card warn">
+    <strong>Optional, not required to clear the interview:</strong> ISC2 Certified in Cybersecurity (CC), CompTIA Security+, Microsoft SC-900, or ISO 27001 Foundation. If you have time after the interview, start CC. Do not delay the interview to finish a certification. Saying “I have started CC and can talk through Domain 1” is enough for a 0–1 year role.
+  </div>
+</section>
+
+<section id="company">
+  <h2>1. Xceedance — what this company actually is</h2>
+  <p>Xceedance is not a bank, not a product-only software company, and not a generic IT body shop. It is an <strong>insurance-focused consulting, technology, and managed-services firm</strong>. In plain language: insurers hire Xceedance to run or improve parts of the insurance factory.</p>
+
+  <h3>Facts you should remember</h3>
+  <table>
+    <tr><th>Item</th><th>What to say</th></tr>
+    <tr><td>Founded</td><td>2013, by Arun Balakrishnan (now Group Chairman and CEO) and co-founders. Arun previously ran Berkshire Hathaway’s insurance operations in India.</td></tr>
+    <tr><td>Headquarters</td><td>US / Bermuda holding structure. US presence includes Worcester, Massachusetts. India legal entity: Xceedance Consulting India Private Limited.</td></tr>
+    <tr><td>Size</td><td>About 4,000–5,500 people depending on the source year. LinkedIn lists 1,001–5,000. The company itself has cited 3,500+ and later 5,500+ as it grew.</td></tr>
+    <tr><td>Clients</td><td>350+ property and casualty (P&amp;C) insurance organisations: insurers, reinsurers, brokers, MGAs (managing general agents), Lloyd’s of London entities.</td></tr>
+    <tr><td>Where they work</td><td>US, UK, Poland, Australia, India (Gurugram, Noida, Bengaluru), with further expansion in Asia.</td></tr>
+    <tr><td>Gurugram office</td><td>Building 6, Candor TechSpace IT/ITES SEZ, Sector 48, Tikri, near Subhash Chowk. Work-from-office. This is a Grade-A SEZ campus.</td></tr>
+    <tr><td>Tagline / purpose</td><td>“Your Way Forward.” Purpose they publish: help catalyse insurance ecosystems for the benefit of society.</td></tr>
+    <tr><td>Values</td><td>Integrity, Collaboration, Ownership, Respect, Persistence. Integrity and ownership matter a lot in a GRC interview.</td></tr>
+  </table>
+
+  <h3>What they sell, in human language</h3>
+  <p>An insurance company has a long chain of work: someone asks for a quote, an underwriter decides whether to insure them and at what price, a policy is issued, premium is collected, a claim is filed, money is paid, reports go to regulators. Xceedance can sit in many of those steps.</p>
+  <ul>
+    <li><strong>Underwriting support</strong> — helping decide which risks to accept.</li>
+    <li><strong>Policy services</strong> — issuing, changing, renewing policies.</li>
+    <li><strong>Claims</strong> — including a Claims TPA (third-party administrator) that handles claims on behalf of insurers. They have talked about about $1 billion of claims payments on behalf of clients over three years.</li>
+    <li><strong>Actuarial, catastrophe (CAT) modelling, exposure management</strong> — the math of disasters and portfolios.</li>
+    <li><strong>Finance and accounting</strong> for insurers.</li>
+    <li><strong>Technology</strong> — application development, Duck Creek and other core-system implementations, cloud, automation, their own tools (for example Risk Data Platform, Digital Underwriting Assistant, IAN agentic ecosystem).</li>
+    <li><strong>Data and analytics</strong> — including property inspection data after acquiring Millennium Information Services.</li>
+  </ul>
+  <p>They also publicly say they handle 10,000+ policy transactions a day and 225+ ongoing operations and technology engagements. That is a lot of other people’s data sitting on Xceedance systems and in Xceedance offices.</p>
+
+  <h3>People whose names help you sound prepared</h3>
+  <ul>
+    <li><strong>Arun Balakrishnan</strong> — Group Chairman &amp; CEO, IIM Ahmedabad, co-founder.</li>
+    <li><strong>Amar Gomber</strong> — President, Corporate Services &amp; Group CFO. His published remit includes IT support, <em>information security</em>, audit, compliance, risk, legal. GRC sits in this corporate world.</li>
+    <li><strong>Kuljit Singh Hooda</strong> — Vice President, Information Security. CISSP, privacy certifications, ISO 27001 Lead Auditor. This is the information-security leadership line.</li>
+    <li><strong>Tirath Singh</strong> — Vice President, IT &amp; Information Security.</li>
+    <li><strong>Abhay Agarwal</strong> — VP, Group Head, Audit &amp; Risk Management (internal audit / enterprise risk; you will work with audit).</li>
+    <li><strong>Hitesh Sablok</strong> — SVP, General Counsel &amp; Group Compliance Head (legal and compliance; you will work with legal and privacy).</li>
+    <li><strong>Amit Tiwari</strong> — President, EMEA &amp; APAC (India and Poland delivery sit in this region).</li>
+  </ul>
+  <p>You do not need to drop all these names. Knowing CEO, that InfoSec has a VP, and that GRC partners with legal, audit, privacy and IT is enough.</p>
+
+  <h3>What employees say (so you are not naive)</h3>
+  <p>Public review sites (AmbitionBox, Glassdoor) generally rate Xceedance around <strong>3.5 / 5</strong>. Culture and job security sit in the middle. Pay and career growth are the weaker scores. Analysts in Gurugram often report packages in a roughly <strong>₹3–4 LPA</strong> band; specialist Risk Analyst roles sit higher, around <strong>₹6–7 LPA</strong>. This InfoSec GRC associate role is specialist, so it may sit above a generic operations analyst, but it is still an entry-level corporate job, not a Big-4 consulting salary. Interviews for analyst roles are often two manager rounds plus HR. Processes can be slow; a referral helps. The JD is explicit: <strong>office, shifts, international time zones</strong>.</p>
+  <div class="card warn">
+    Use this in the interview as realism, not as a complaint. “I understand it is office-based with shifts because clients are in the US and UK, and I am fine with that” is a strength. Do not volunteer review-site gossip.
+  </div>
+</section>
+
+<section id="why-grc">
+  <h2>2. Why Xceedance has an Information Security GRC team</h2>
+  <p>Imagine a US insurer wants Xceedance’s Gurugram team to process claims. That insurer is about to send names, addresses, medical notes, vehicle details, bank details — the private lives of thousands of policyholders — to another company on another continent.</p>
+  <p>Before they sign, their security team sends a <strong>security questionnaire</strong>: Do you encrypt data? Who can see it? Are laptops locked? Do you train staff? Do you have ISO 27001? Can we see your SOC 2 report? What happens if there is a breach at 2 a.m. our time?</p>
+  <p>If Xceedance answers badly, the deal dies. If Xceedance answers well but cannot prove it in an audit, the deal dies later. GRC is the function that keeps those answers true every day.</p>
+  <p>Xceedance’s own infrastructure page lists client-relevant standards: <strong>GDPR, ISO 27001, PCI, APRA, CPS 234</strong>. That is the world this role lives in. The JD also names <strong>NIST CSF, SOC 2, privacy, business continuity</strong>.</p>
+  <p>So this is mostly an <strong>internal</strong> GRC job: protect Xceedance, and through that protect clients. It is not a job where you will be asked to hack a website on day one. It is a job where a missing Excel row can become a client finding.</p>
+</section>
+
+<section id="jd">
+  <h2>3. The job description, line by line</h2>
+  <p>Title: <strong>Associate Analyst — Information Security GRC</strong>. Location: Gurugram. Experience: 0–1 year. Full-time, work from office, shifts.</p>
+
+  <h3>Role overview, translated</h3>
+  <table>
+    <tr><th>JD phrase</th><th>What it really means</th></tr>
+    <tr><td>Motivated and detail-oriented graduate</td><td>You will live in trackers. A wrong date, a missing owner, a file named “final_v3_reallyfinal” will hurt.</td></tr>
+    <tr><td>Support security governance, risk, compliance, audit readiness, awareness, business assurance</td><td>You are the junior who keeps the machine running: documents, follow-ups, evidence, training numbers, client questions.</td></tr>
+    <tr><td>International business</td><td>US/UK/EU clients, English writing, time zones, their laws (GDPR, SOC 2 expectations, insurance regulators).</td></tr>
+    <tr><td>Strong communication + disciplined analysis and documentation</td><td>The two skills that beat a CISSP on a fresher. If you cannot write a clean email, you cannot do GRC.</td></tr>
+  </table>
+
+  <h3>Each responsibility, with a day-one picture</h3>
+  <ol>
+    <li><strong>Policies, standards, procedures, templates, records.</strong> Example: the Access Control Policy is 18 months old. You check whether it still matches how people actually get system access, mark review due dates, and file the approved version.</li>
+    <li><strong>Risk assessments, risk register, action tracking.</strong> Example: IT says a file server has no multi-factor authentication. You help log the risk, owner, due date, and ping the owner every week until it is closed.</li>
+    <li><strong>Evidence for internal audits, external audits, customer reviews, management reviews.</strong> Example: auditor asks for “last 10 joiner access approvals.” You collect PDFs, check they are complete, put them in a folder with a naming convention.</li>
+    <li><strong>Control testing, observations, gaps, corrective actions.</strong> Example: policy says laptops must auto-lock in 5 minutes. You sample 15 laptops. 3 fail. You write the observation and track the fix.</li>
+    <li><strong>Customer security questionnaires and RFIs, under supervision.</strong> Example: a London broker sends 180 questions in Excel. You draft answers from the knowledge base, flag anything you are unsure of, never invent an answer.</li>
+    <li><strong>Third-party security due diligence.</strong> Example: HR wants a new background-check vendor. You send the vendor questionnaire, collect ISO certificate, log residual risk and any exception.</li>
+    <li><strong>Security awareness communications and training tracking.</strong> Example: phishing-training completion is 81%. You chase the 19%, send reminders, report to management.</li>
+    <li><strong>Status reports, meeting notes, dashboards, registers.</strong> This is the daily product: clean Excel, clean minutes, one-page status.</li>
+    <li><strong>Work with business, technology, legal, privacy, audit.</strong> You are a coordinator. People will ignore your first email. Follow-up is the job.</li>
+  </ol>
+
+  <h3>What they listed as foundational knowledge</h3>
+  <p>This is the syllabus. Everything in this guide maps to it:</p>
+  <ul>
+    <li>Governance, risk, controls, audit, compliance fundamentals</li>
+    <li>ISO/IEC 27001, NIST CSF, SOC 2, privacy principles, business continuity concepts</li>
+    <li>Common security risks, data classification, access control, third-party risk, awareness</li>
+    <li>Word, Excel, PowerPoint, collaboration tools (Teams, SharePoint, Outlook)</li>
+  </ul>
+  <p>Preferred extras: ISC2 CC, Security+, SC-900, ISO 27001 Foundation / internal auditor, any privacy/risk/audit course, internship or lab. Nice to have, not a gate if you can talk like someone who has already started learning.</p>
+
+  <h3>The hidden job requirements</h3>
+  <ul>
+    <li><strong>English writing that a US client would trust.</strong> Short sentences, no slang, no overclaiming.</li>
+    <li><strong>Confidentiality.</strong> You will see incident details, client names, audit findings. Gossip is a firing offence in this function.</li>
+    <li><strong>Comfort with saying “I don’t know, I will check.”</strong> Inventing a control that does not exist is worse than a delay.</li>
+    <li><strong>Shifts.</strong> A US East Coast auditor at 9 a.m. their time is evening in Gurugram.</li>
+  </ul>
+</section>
+
+<section id="day">
+  <h2>4. A week in this job (so you can picture it)</h2>
+  <div class="card">
+    <p><strong>Monday.</strong> Risk-register standup. 14 open actions. Three owners have not updated. You send polite, specific reminders: “Risk R-042, MFA on VPN, due 20 Sep, please confirm status by 4 p.m.” You update the tracker.</p>
+    <p><strong>Tuesday.</strong> A UK client questionnaire lands. 96 questions. You copy last year’s answers into a working sheet, highlight 11 that may have changed (new office, new vendor, new tool), and book 20-minute calls with IT and HR.</p>
+    <p><strong>Wednesday.</strong> Internal audit wants evidence of quarterly access reviews for the claims application. Two application owners send screenshots with no date. You ask for the system export with timestamp and reviewer name.</p>
+    <p><strong>Thursday.</strong> Awareness: you draft a 150-word mail on “do not put policyholder data in ChatGPT or personal Gmail,” get it approved, schedule it, and log who opened it.</p>
+    <p><strong>Friday.</strong> You test one control: “leavers lose access within 24 hours.” You sample 10 exits from HR. 1 account was still active after 3 days. You write a factual observation, not a drama essay, and open a corrective action.</p>
+  </div>
+  <p>Notice what is missing: no Kali Linux, no packet capture, no “I found a zero-day.” If that disappoints you, this is the wrong role. If that feels like real professional work, you will do well.</p>
+</section>
+
+<section id="not-hacking">
+  <h2>5. First teaching idea: this is not ethical hacking</h2>
+  <p>Computer Science students hear “information security” and think of Capture the Flag, bug bounties, SOC analyst watching red alerts. Those jobs exist. This is a different sport.</p>
+  <div class="grid">
+    <div class="card ex">
+      <h4>GRC / this role</h4>
+      <ul>
+        <li>Writes and maintains the rulebook</li>
+        <li>Asks “are we doing what we promised?”</li>
+        <li>Collects proof</li>
+        <li>Talks to auditors and clients</li>
+        <li>Tracks risk until someone fixes it</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>SOC / hacking / engineering</h4>
+      <ul>
+        <li>Finds and stops attacks</li>
+        <li>Configures firewalls and EDR</li>
+        <li>Writes detection rules</li>
+        <li>Breaks or defends systems</li>
+      </ul>
+    </div>
+  </div>
+  <p>GRC people still must understand technology well enough to not be fooled. Your CS degree helps: you already know what an account, a log, a server, a database, and encryption roughly are. GRC is those ideas plus process, evidence, and language.</p>
+  <p>A useful picture: in a hospital, surgeons operate. GRC is closer to the people who keep the hospital accredited — checklists, incident logs, staff training, pharmacy audits — so patients (here: clients and policyholders) are safe.</p>
+</section>
+
+<section id="info">
+  <h2>6. What “information” and “information security” mean</h2>
+  <p><strong>Information</strong> is anything that tells you something useful, in any form: a claims PDF, a Slack message, a printed policy schedule, a spreadsheet of employees, a recording of a customer call, a source-code repo, a whiteboard photo.</p>
+  <p><strong>Information security</strong> is the practice of protecting that information so the business can still use it. It is not “make everything secret.” A claims handler must see the claim. The goal is the right person, the right information, the right time, and no one else.</p>
+  <div class="card ex">
+    <strong>Xceedance example.</strong> A claims analyst in Gurugram opens a US auto claim. She should see the accident report. She should not see every other customer’s medical file. She should not forward the file to her personal Gmail so she can work from a café. The printer in the pantry should not hold the last page of someone’s claim. That whole story is information security.
+  </div>
+  <p>Information security covers people, process, and technology. A lock on a door is security. A rule “no visitor USB sticks” is security. Encryption is security. Training is security. GRC’s job is to make sure those pieces exist, match a standard, and can be proven.</p>
+</section>
+
+<section id="cia">
+  <h2>7. The CIA triad — learn this until it is automatic</h2>
+  <p>Almost every entry-level security interview starts here. CIA is not the spy agency. It is three properties of information:</p>
+  <table>
+    <tr><th>Letter</th><th>Meaning</th><th>Failure example at Xceedance</th><th>Typical control</th></tr>
+    <tr><td><strong>C — Confidentiality</strong></td><td>Only authorised people can see or use it.</td><td>A staff member emails a policyholder list to the wrong broker.</td><td>Access control, encryption, NDAs, clean-desk, data classification, DLP.</td></tr>
+    <tr><td><strong>I — Integrity</strong></td><td>It is complete and unaltered except by authorised change.</td><td>Someone edits a claim amount in the database with no log. Or Excel corruption drops a column of sums.</td><td>Change management, checksums/hashes, maker-checker, backups with versioning, input validation.</td></tr>
+    <tr><td><strong>A — Availability</strong></td><td>Authorised people can get it when they need it.</td><td>Ransomware locks the claims system. Or the office internet dies and there is no backup line. Claims cannot be paid.</td><td>Backups, redundancy, patching, DDoS protection, business continuity, disaster recovery.</td></tr>
+  </table>
+  <p>Security is a balance. If you lock a file so hard that claims handlers cannot open it, you protected confidentiality and destroyed availability. GRC helps the business choose a sensible balance, write it down, and live with it.</p>
+  <h3>Two extra words managers like</h3>
+  <ul>
+    <li><strong>Non-repudiation:</strong> a person cannot credibly deny they did something. Example: digitally signed approval “I authorised this vendor.”</li>
+    <li><strong>Authentication, authorisation, accounting (AAA):</strong> prove who you are, check what you are allowed to do, record what you did. Login + permissions + logs.</li>
+  </ul>
+  <div class="card callout">
+    <strong>Interview move.</strong> When they ask “what is confidentiality?” do not stop at the definition. Add one Xceedance-flavoured example and one control. That is the difference between a memorised line and a colleague.
+  </div>
+</section>
+
+<section id="tvr">
+  <h2>8. Threat, vulnerability, risk — stop mixing these up</h2>
+  <p>This is the second thing every GRC interviewer checks.</p>
+  <table>
+    <tr><th>Word</th><th>Plain meaning</th><th>Example</th></tr>
+    <tr><td><strong>Asset</strong></td><td>Something of value you want to protect.</td><td>Client claims database, laptop, reputation, source code.</td></tr>
+    <tr><td><strong>Threat</strong></td><td>Something that can cause harm. A who or a what.</td><td>Phishing gang, dishonest employee, fire, ransomware, careless vendor.</td></tr>
+    <tr><td><strong>Vulnerability</strong></td><td>A weakness that a threat can use.</td><td>No MFA, unpatched server, staff who click any link, open USB ports, vendor with no contract clause.</td></tr>
+    <tr><td><strong>Likelihood</strong></td><td>How probable the bad event is.</td><td>“Phishing emails arrive daily” is high likelihood.</td></tr>
+    <tr><td><strong>Impact</strong></td><td>How bad it would be if it happened.</td><td>Leak of 2 million policyholders = high impact (legal, client loss, regulator, headlines).</td></tr>
+    <tr><td><strong>Risk</strong></td><td>The chance that a threat will use a vulnerability and hurt an asset. Often thought of as likelihood × impact.</td><td>Risk that a phishing mail leads to a mailbox breach and client data leaves the company.</td></tr>
+    <tr><td><strong>Control / treatment</strong></td><td>What you do about the risk.</td><td>MFA, training, email filter, incident process, cyber insurance.</td></tr>
+  </table>
+  <div class="card ex">
+    <strong>One story, all the words.</strong>
+    Asset: Gurugram claims laptops.<br>
+    Threat: thief, or a staff member leaving a laptop in an auto.<br>
+    Vulnerability: disk not encrypted; no cable lock; no auto-lock.<br>
+    Risk: a lost laptop exposes US policyholder data (high impact; medium-high likelihood in a big office).<br>
+    Control: BitLocker encryption, MFA, auto-lock, clean-desk, report-loss-within-1-hour procedure.
+  </div>
+  <p><strong>Residual risk</strong> is what is left after controls. Encryption does not stop the laptop being stolen, but it may make the data unreadable. Management must accept residual risk, not you personally.</p>
+</section>
+
+<section id="grc">
+  <h2>9. GRC — governance, risk, compliance</h2>
+  <p>GRC is three connected jobs. If you remember only one teaching picture, remember a company as a car:</p>
+  <ul>
+    <li><strong>Governance</strong> is the steering wheel and the highway code the company writes for itself: who decides, what the rules are, how we measure, who is accountable.</li>
+    <li><strong>Risk</strong> is looking at the road: what could go wrong, how bad, what we will do.</li>
+    <li><strong>Compliance</strong> is staying inside the external lines: laws, client contracts, ISO, SOC 2, privacy regulators. Also internal policy, because “we ignored our own policy” is a finding too.</li>
+  </ul>
+  <p>They are not three separate teams in a company this size. One junior analyst will touch all three in a single week.</p>
+  <h3>Governance in one paragraph</h3>
+  <p>The board and senior management are responsible for information security. They approve a policy, appoint a CISO or VP Information Security, demand reports, and fund controls. ISO 27001 is obsessed with this: security is a management system, not an IT hobby.</p>
+  <h3>Risk in one paragraph</h3>
+  <p>You cannot make risk zero. You identify, analyse, evaluate, treat, and monitor. You write it in a risk register so it is not trapped in someone’s head.</p>
+  <h3>Compliance in one paragraph</h3>
+  <p>Xceedance must satisfy Indian law (including DPDPA as it applies), client contracts, and often GDPR because EU/UK personal data is processed in India. Clients may also demand ISO 27001 certification and a SOC 2 report. Compliance is “map the obligation → map the control → keep evidence → fix gaps.”</p>
+  <div class="card callout">
+    <strong>Business assurance</strong> in the JD means: give management and customers confidence that security is operating, not just written. Dashboards, audit results, questionnaire answers, exception reports — that is assurance.
+  </div>
+</section>
+
+<section id="gov">
+  <h2>10. Governance documents — policy vs standard vs procedure</h2>
+  <p>This will be asked. Learn the hierarchy. Think of it as: <em>why / what / how / extra advice / proof</em>.</p>
+  <table>
+    <tr><th>Document</th><th>Job</th><th>Example</th></tr>
+    <tr><td><strong>Policy</strong></td><td>High-level rule from management. “We will…” Rarely changes. Mandatory.</td><td>Information Security Policy: “Access to information is granted on least privilege and need-to-know.”</td></tr>
+    <tr><td><strong>Standard</strong></td><td>Measurable requirement that makes the policy concrete.</td><td>Password standard: minimum 14 characters, MFA for remote access, 90-day review of privileged accounts.</td></tr>
+    <tr><td><strong>Procedure</strong></td><td>Step-by-step how to do it. Named roles, screens, tickets.</td><td>Joiner-mover-leaver procedure: HR ticket → IT creates account → manager approves application access → Day 1 checklist.</td></tr>
+    <tr><td><strong>Guideline</strong></td><td>Advice. Flexible. “Should,” not always “must.”</td><td>How to write a good password phrase; how to spot a phishing mail.</td></tr>
+    <tr><td><strong>Template / record</strong></td><td>The blank form and the filled evidence.</td><td>Access request form; completed form stored in SharePoint is a record.</td></tr>
+  </table>
+  <div class="card ex">
+    <strong>Tiny set you might maintain in this job.</strong>
+    Information Security Policy, Acceptable Use, Access Control, Data Classification, Cryptography, Operations Security, Supplier Security, Incident Management, Business Continuity, Privacy/Data Protection, HR Security, Physical Security, plus the risk register, statement of applicability, training tracker, exception log, vendor inventory.
+  </div>
+  <p>Your work on “periodic review”: every document has owner, version, approval date, next review date. If the cloud standard still talks about a data centre Xceedance left two years ago, the document is stale. Stale documents fail audits.</p>
+</section>
+
+<section id="risk">
+  <h2>11. Risk management, the way a junior actually does it</h2>
+  <p>The textbook cycle:</p>
+  <ol>
+    <li><strong>Identify</strong> — what could go wrong, to which asset?</li>
+    <li><strong>Analyse</strong> — likelihood and impact, often 1–5 scales.</li>
+    <li><strong>Evaluate</strong> — compare to risk appetite. Is this too high to live with?</li>
+    <li><strong>Treat</strong> — mitigate, avoid, transfer, accept.</li>
+    <li><strong>Monitor and report</strong> — register, KRIs, overdue actions.</li>
+  </ol>
+  <h3>Four treatment options (memorise)</h3>
+  <table>
+    <tr><th>Option</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td><strong>Mitigate / reduce</strong></td><td>Add or improve controls.</td><td>Turn on MFA; encrypt laptops.</td></tr>
+    <tr><td><strong>Avoid</strong></td><td>Stop the activity.</td><td>Do not host a client’s data in an uncertified tool.</td></tr>
+    <tr><td><strong>Transfer / share</strong></td><td>Someone else takes some of the financial or operational hit.</td><td>Cyber insurance; a contract that makes a cloud vendor liable for their outage. Note: you never transfer reputation or regulatory duty completely.</td></tr>
+    <tr><td><strong>Accept</strong></td><td>Live with it, with a named approver.</td><td>A low-impact system without MFA because it holds no personal data, documented as an exception for 12 months.</td></tr>
+  </table>
+  <h3>What a risk register looks like</h3>
+  <p>A spreadsheet. Columns typically:</p>
+  <p class="mono">Risk ID | Date | Asset / process | Risk description | Threat | Vulnerability | Existing controls | Likelihood | Impact | Risk rating | Owner | Treatment | Action | Due date | Status | Residual rating | Last update</p>
+  <p>Your job as associate: keep it tidy. No blank owners. No “in progress” for six months. No two risks that are actually the same. Chase people. Prepare the slide for the monthly risk meeting.</p>
+  <div class="card ex">
+    <strong>Sample row.</strong> R-017 · Claims file share · Unauthorised access to US claims data because shared folder permissions are too broad · Threat: insider or compromised account · Vulnerability: nested groups, no quarterly review · Existing: VPN · L=4 I=5 Rating=High · Owner: IT Infra Manager · Treatment: mitigate — implement least privilege + quarterly review + DLP · Due: 31 Oct · Status: open.
+  </div>
+  <p><strong>Inherent risk</strong> = before extra controls. <strong>Residual risk</strong> = after. Managers care about residual, and about whether the due date is real.</p>
+</section>
+
+<section id="controls">
+  <h2>12. Controls — the actual “security things”</h2>
+  <p>A <strong>control</strong> is a measure that reduces risk. Interviewers love classifying them.</p>
+  <h3>By purpose</h3>
+  <ul>
+    <li><strong>Preventive</strong> — stop it happening. MFA, lock on the door, least privilege, secure coding.</li>
+    <li><strong>Detective</strong> — notice it. Logs, CCTV, phishing reports, SOC alerts, access-review exceptions.</li>
+    <li><strong>Corrective</strong> — repair. Restore from backup, revoke a token, disciplinary action, patch after incident.</li>
+    <li>Sometimes also <strong>deterrent</strong> (warning banner), <strong>compensating</strong> (alternative when the main control is impossible).</li>
+  </ul>
+  <h3>By type</h3>
+  <ul>
+    <li><strong>Administrative / process:</strong> policies, training, background checks, approvals.</li>
+    <li><strong>Technical:</strong> encryption, firewalls, EDR, IAM, DLP.</li>
+    <li><strong>Physical:</strong> badges, guards, CCTV, visitor logs, locked server cages.</li>
+  </ul>
+  <p><strong>Control testing</strong> in this job: pick the control statement (“leavers are disabled within 24 hours”), pick a sample, collect evidence, pass/fail, write the gap, open a CAPA (corrective and preventive action), follow to closure.</p>
+  <p><strong>Test of design (TOD)</strong> — is the control designed well on paper? <strong>Test of operating effectiveness (TOE)</strong> — did it actually work during the period? SOC 2 Type II and SOX-style testing care about TOE over time. You may only assist, but knowing the words is impressive at 0–1 years.</p>
+</section>
+
+<section id="audit">
+  <h2>13. Audit, evidence, findings, management reviews</h2>
+  <p>An <strong>audit</strong> is an independent check: “You said you do X. Show me.”</p>
+  <table>
+    <tr><th>Kind</th><th>Who</th><th>Why it exists at Xceedance</th></tr>
+    <tr><td>Internal audit</td><td>Xceedance audit team (Abhay Agarwal’s function) or trained internal auditors</td><td>Find issues before clients and certifiers do. ISO 27001 requires internal audits.</td></tr>
+    <tr><td>External / certification audit</td><td>ISO 27001 certification body</td><td>Keep the certificate that clients ask for.</td></tr>
+    <tr><td>Customer audit / security review</td><td>The insurer-client’s security team</td><td>They must due-diligence their offshore vendor.</td></tr>
+    <tr><td>SOC examination</td><td>CPA firm for SOC 2</td><td>US-style assurance report.</td></tr>
+  </table>
+  <h3>What “evidence” means</h3>
+  <p>Not a story. A dated artefact that a stranger can understand.</p>
+  <ul>
+    <li>Good: PDF export of access-review sign-off dated 12 Aug 2026, reviewer name, list of accounts, tickets for revocations.</li>
+    <li>Bad: “We do access reviews” in an email with no attachment. Or a screenshot cropped so the date is missing. Or a policy that was never approved.</li>
+  </ul>
+  <p>Evidence rules of thumb: <strong>complete, accurate, dated, attributable, matches the period, stored where the auditor can be pointed to it</strong>.</p>
+  <h3>Finding / observation / gap / NC</h3>
+  <ul>
+    <li><strong>Observation / opportunity:</strong> not a hard fail, but messy.</li>
+    <li><strong>Minor nonconformity (ISO):</strong> a lapse, not a collapsed system.</li>
+    <li><strong>Major nonconformity:</strong> the management system is not working in that area. Certificate at risk.</li>
+  </ul>
+  <p>Your tone in writing findings: factual, no blame theatre. “3 of 10 sampled leaver accounts were active more than 24 hours after HR exit date (tickets 1182, 1190, 1211). Policy IS-AC-04 requires 24 hours.” Then owner, root cause, fix, due date.</p>
+  <p><strong>Management review</strong> (ISO 27001 clause 9.3): leadership looks at audit results, risks, incidents, KPIs, and decides improvements. You may prepare the pack: slides, registers, open-item list.</p>
+</section>
+
+<section id="iso">
+  <h2>14. ISO/IEC 27001 — the main framework to learn in depth (still basics)</h2>
+  <p>ISO/IEC 27001 is an international standard for an <strong>Information Security Management System (ISMS)</strong>. An ISMS is the organised way a company runs security: leadership, risk, documents, controls, checks, improvement. You can be <strong>certified</strong> by an external body. Many enterprise clients treat a valid ISO 27001 certificate as a ticket to the conversation.</p>
+  <p>Current version people mean: <strong>ISO/IEC 27001:2022</strong>.</p>
+  <h3>Two halves</h3>
+  <ol>
+    <li><strong>Clauses 4 to 10</strong> — the management system (the “how we run it”).</li>
+    <li><strong>Annex A</strong> — a catalogue of security controls you choose from, based on risk. 2022 edition: <strong>93 controls</strong> in 4 themes.</li>
+  </ol>
+  <h3>Clauses 4–10, in CS-student English</h3>
+  <table>
+    <tr><th>Clause</th><th>Name</th><th>Plain meaning</th></tr>
+    <tr><td>4</td><td>Context</td><td>Who we are, interested parties (clients, regulators, staff), scope of the ISMS. Scope might be “insurance operations and supporting IT in India delivery centres.”</td></tr>
+    <tr><td>5</td><td>Leadership</td><td>Management actually owns this. Policy exists. Roles assigned.</td></tr>
+    <tr><td>6</td><td>Planning</td><td>Risk assessment, risk treatment, Statement of Applicability, objectives.</td></tr>
+    <tr><td>7</td><td>Support</td><td>People, competence, awareness, communication, documented information.</td></tr>
+    <tr><td>8</td><td>Operation</td><td>Do the risk treatment, run the processes, control changes, handle suppliers.</td></tr>
+    <tr><td>9</td><td>Performance evaluation</td><td>Measure, internal audit, management review.</td></tr>
+    <tr><td>10</td><td>Improvement</td><td>Nonconformity, corrective action, continual improvement. Not “certificate on the wall forever.”</td></tr>
+  </table>
+  <h3>Annex A themes (2022)</h3>
+  <ul>
+    <li><strong>A.5 Organisational</strong> — policies, roles, threat intelligence, suppliers, cloud, incident, continuity…</li>
+    <li><strong>A.6 People</strong> — screening, terms of employment, awareness, disciplinary, remote working, confidentiality.</li>
+    <li><strong>A.7 Physical</strong> — offices, visitors, cabling, secure disposal, clear desk.</li>
+    <li><strong>A.8 Technological</strong> — access, MFA, malware, logging, crypto, development security, data leak prevention…</li>
+  </ul>
+  <p><strong>Statement of Applicability (SoA):</strong> the document that says, for each Annex A control, “applicable or not, and why, and where implemented.” Auditors live in the SoA. A junior may help keep it aligned when a new tool is added.</p>
+  <p><strong>ISO 27002</strong> is the guidance book on how to implement Annex A. <strong>ISO 27005</strong> is more detail on risk. You do not need to study them for this interview; knowing they exist is enough.</p>
+  <div class="card callout">
+    ISO 27001 is not a product you install. It is a way of managing. A company can have expensive firewalls and still fail ISO because nobody reviewed access, nobody trained staff, and the risk register is a 2019 Excel on someone’s desktop.
+  </div>
+</section>
+
+<section id="nist">
+  <h2>15. NIST Cybersecurity Framework (CSF)</h2>
+  <p>NIST is the US National Institute of Standards and Technology. The <strong>Cybersecurity Framework</strong> is a voluntary, popular way to organise cyber work, especially with US clients. It is <em>not</em> a certification you hang on the wall the way ISO 27001 is. It is a language and a structure.</p>
+  <p>Older interviews still say <strong>five functions</strong>. CSF 2.0 (2024) added a sixth, <strong>Govern</strong>, which GRC people love because it is literally their job.</p>
+  <table>
+    <tr><th>Function</th><th>Question it answers</th><th>Example activity</th></tr>
+    <tr><td><strong>Govern (GV)</strong></td><td>How do we oversee and manage cyber risk as a business?</td><td>Policy, roles, risk appetite, supply-chain governance, oversight.</td></tr>
+    <tr><td><strong>Identify (ID)</strong></td><td>What do we have and what could hurt us?</td><td>Asset inventory, risk assessment, business context.</td></tr>
+    <tr><td><strong>Protect (PR)</strong></td><td>What safeguards do we put in place?</td><td>Access control, awareness, encryption, maintenance.</td></tr>
+    <tr><td><strong>Detect (DE)</strong></td><td>How do we notice something is wrong?</td><td>Logs, monitoring, anomalies.</td></tr>
+    <tr><td><strong>Respond (RS)</strong></td><td>What do we do when it happens?</td><td>Incident response plan, communications, containment.</td></tr>
+    <tr><td><strong>Recover (RC)</strong></td><td>How do we get back to work?</td><td>Disaster recovery, backups, lessons learned.</td></tr>
+  </table>
+  <p><strong>How it differs from ISO 27001:</strong> ISO is a certifiable management system with required clauses. NIST CSF is a flexible framework, very common in US conversations, good for maturity discussions (“we are repeatable at Protect, still ad hoc at Detect”). Many companies map both onto the same controls so they do not do the work twice. That mapping is called a <strong>control crosswalk</strong>.</p>
+  <p>If they only expect five names and you also know Govern, you look current, not cocky — mention CSF 2.0 in one sentence.</p>
+</section>
+
+<section id="soc2">
+  <h2>16. SOC 2</h2>
+  <p>SOC 2 is not an ISO standard. It is an <strong>attestation report</strong> under AICPA (US accountants) about a service organisation’s controls. Xceedance is a service organisation: clients outsource operations and technology to it. US insurers often ask: “Send us your SOC 2.”</p>
+  <h3>Trust Services Criteria (TSC)</h3>
+  <ul>
+    <li><strong>Security</strong> — always in scope. Protect against unauthorised access.</li>
+    <li><strong>Availability</strong> — system is up as committed.</li>
+    <li><strong>Processing integrity</strong> — processing is complete, valid, accurate, timely.</li>
+    <li><strong>Confidentiality</strong> — confidential information is protected as committed.</li>
+    <li><strong>Privacy</strong> — personal information is collected, used, retained, disclosed, disposed in line with the privacy notice / GAPP-style criteria.</li>
+  </ul>
+  <p>A company chooses which besides Security apply. A claims-processing platform might include Security, Availability, Confidentiality, Privacy.</p>
+  <h3>Type I vs Type II</h3>
+  <table>
+    <tr><th></th><th>Type I</th><th>Type II</th></tr>
+    <tr><td>What it says</td><td>Controls are <em>designed</em> suitably at a point in time.</td><td>Controls are designed <em>and operated effectively</em> over a period (often 3–12 months).</td></tr>
+    <tr><td>Client preference</td><td>Better than nothing, early-stage.</td><td>What serious clients want.</td></tr>
+  </table>
+  <p>SOC 2 is done by a CPA firm. GRC collects evidence for months: access reviews, change tickets, backup tests, incident tickets, vendor reviews. Your associate job is exactly that collection discipline.</p>
+  <p><strong>SOC 1</strong> is about controls relevant to a client’s financial reporting (more finance/SOX). <strong>SOC 2</strong> is security and those TSC. Do not mix them up.</p>
+</section>
+
+<section id="privacy">
+  <h2>17. Privacy principles (GDPR-shaped, India-aware)</h2>
+  <p>Privacy is not the same as security, but they overlap. Security is “protect the data.” Privacy is “should we even have it, and are we using it fairly?”</p>
+  <p>Xceedance processes personal data of policyholders, claimants, employees, and sometimes health or financial data. Clients in Europe and the UK bring <strong>GDPR / UK GDPR</strong>. India has the <strong>Digital Personal Data Protection Act (DPDPA), 2023</strong>. US insurance has a patchwork (state laws, GLBA for some financial data, HIPAA if health-related, NYDFS cyber rules for some entities). You are not expected to be a lawyer. You are expected to know the ideas.</p>
+  <h3>Core principles (say these in an interview)</h3>
+  <ol>
+    <li><strong>Lawfulness, fairness, transparency</strong> — have a valid reason; tell people.</li>
+    <li><strong>Purpose limitation</strong> — use data for the stated purpose, not a side project.</li>
+    <li><strong>Data minimisation</strong> — do not copy the whole policyholder database into a test Excel on your desktop.</li>
+    <li><strong>Accuracy</strong> — wrong address can pay the wrong person.</li>
+    <li><strong>Storage limitation</strong> — do not keep claim files forever “just in case” if the contract and law say 7 years.</li>
+    <li><strong>Integrity and confidentiality</strong> — security sits inside privacy.</li>
+    <li><strong>Accountability</strong> — you must be able to demonstrate compliance.</li>
+  </ol>
+  <p>Other words: <strong>controller</strong> (decides why/how — often the insurer client), <strong>processor</strong> (processes on instructions — often Xceedance), <strong>DPA</strong> (data processing agreement), <strong>DPIA</strong> (data protection impact assessment for high-risk processing), <strong>data subject rights</strong> (access, deletion, correction), <strong>breach notification</strong> (GDPR has a 72-hour regulator clock in many cases — know that the clock exists).</p>
+  <div class="card ex">
+    <strong>GRC privacy moment.</strong> A developer wants production claims data in a lower environment to “test a report.” You should smell a privacy and security issue: production personal data in test, maybe without masking, maybe on a laptop. Escalate. Do not just say yes because IT is senior.
+  </div>
+</section>
+
+<section id="bcp">
+  <h2>18. Business continuity concepts</h2>
+  <p>The JD lists this separately. Keep it basic.</p>
+  <ul>
+    <li><strong>Business continuity (BC / BCM):</strong> keep critical services running through disruption (pandemic, flood in Gurugram, city-wide internet failure, political unrest, building fire).</li>
+    <li><strong>Disaster recovery (DR):</strong> mostly IT — restore systems and data after a disaster. DR is a subset of BC.</li>
+    <li><strong>BIA (business impact analysis):</strong> which processes die first, and how fast that becomes unacceptable. Claims payment might be more time-critical than an internal newsletter.</li>
+    <li><strong>RTO (recovery time objective):</strong> how quickly the process must be back. “Claims app back in 4 hours.”</li>
+    <li><strong>RPO (recovery point objective):</strong> how much data loss is tolerable. “Maximum 15 minutes of data loss” means backups or replication at least that frequent.</li>
+    <li><strong>Tabletop exercise:</strong> a practised scenario in a meeting room. “Ransomware at 2 a.m. What do we do?” GRC often helps document it.</li>
+  </ul>
+  <p>ISO 27001 has continuity controls; there is also ISO 22301 for full BCM. Knowing RTO vs RPO is enough to look competent.</p>
+</section>
+
+<section id="class">
+  <h2>19. Data classification</h2>
+  <p>Not all information is equal. Classification is the label that tells people how carefully to handle it.</p>
+  <p>A common four-level scheme (names vary):</p>
+  <table>
+    <tr><th>Label</th><th>Examples at Xceedance</th><th>Handling</th></tr>
+    <tr><td>Public</td><td>Website marketing, published job ads</td><td>No restriction.</td></tr>
+    <tr><td>Internal</td><td>Office cafeteria menu, internal org chart without personal mobiles</td><td>Staff only, not for Twitter.</td></tr>
+    <tr><td>Confidential</td><td>Client contracts, unreleased pricing, employee IDs</td><td>Need-to-know, encrypted in transit, no personal email.</td></tr>
+    <tr><td>Restricted / Secret</td><td>Policyholder PII, medical reports, authentication secrets, incident details</td><td>Strictest: named access, DLP, no local copies, maybe dedicated rooms.</td></tr>
+  </table>
+  <p>Classification drives everything else: who can access, whether it can go to a vendor, whether it can go into a generative AI tool, how it is destroyed (shred vs recycle bin).</p>
+</section>
+
+<section id="access">
+  <h2>20. Access control, in GRC language</h2>
+  <p>Access control is “who can do what to which information.” CS students already know operating-system permissions. GRC adds process and evidence.</p>
+  <h3>Principles</h3>
+  <ul>
+    <li><strong>Least privilege:</strong> the minimum access needed for the job, not “give admin, it is easier.”</li>
+    <li><strong>Need-to-know:</strong> even if you are senior, you do not see a client’s data if you are not on that account.</li>
+    <li><strong>Separation of duties:</strong> the person who requests a payment is not the only person who approves it. Maker-checker.</li>
+    <li><strong>Joiner-mover-leaver:</strong> access at hiring, change when role changes, remove on exit. Movers are the silent killer: someone joins claims, later moves to marketing, still has claims folders.</li>
+  </ul>
+  <h3>Models you may hear</h3>
+  <ul>
+    <li><strong>RBAC</strong> — role-based. “Claims analyst India” role has a standard bundle of apps.</li>
+    <li><strong>MFA</strong> — something you know + something you have (or are). For remote access this is nearly non-negotiable with US/EU clients.</li>
+    <li><strong>Privileged access:</strong> admins, root, domain admin. Extra logging, extra approval, maybe PAM vault.</li>
+    <li><strong>Periodic access recertification:</strong> manager says “yes, these 40 people still need this app.” GRC chases the managers and stores the export.</li>
+  </ul>
+</section>
+
+<section id="tprm">
+  <h2>21. Third-party / vendor security due diligence</h2>
+  <p>Xceedance is a vendor to insurers. Xceedance also has vendors: cloud providers, laptop suppliers, background-check firms, cab companies with office access, SaaS tools, subcontractors. Client data can leak through a vendor as easily as through an employee.</p>
+  <p><strong>TPRM</strong> = third-party risk management. Typical flow:</p>
+  <ol>
+    <li>Business wants a tool/vendor.</li>
+    <li>Intake: what data, what access, which client constraints.</li>
+    <li>Due diligence: questionnaire, ISO certificate, SOC 2 report, pentest summary, privacy docs, financial sanity, subcontractors.</li>
+    <li>Risk rate: inherent and residual.</li>
+    <li>Contract clauses: breach notice, audit rights, data location, deletion on exit.</li>
+    <li>Approve, conditional approve, or reject. Exceptions go to a named approver.</li>
+    <li>Onboard, then <strong>monitor</strong>: annual reassessment, expiry of certificates, incident news.</li>
+    <li>Offboard: access cut, data returned or destroyed, evidence of destruction.</li>
+  </ol>
+  <p>Your job: keep the vendor inventory and assessment tracker honest. Do not let a “temporary” vendor live two years with no review.</p>
+</section>
+
+<section id="aware">
+  <h2>22. Security awareness</h2>
+  <p>Most incidents still start with a person: phishing, mis-sent email, weak sharing link, screenshot on WhatsApp. Awareness is a control, not a poster.</p>
+  <p>What you will do:</p>
+  <ul>
+    <li>Help run induction training for joiners and annual refreshers.</li>
+    <li>Track completion % by department. Report red departments.</li>
+    <li>Phishing simulations: if 20% click, that is a metric and a training need, not a humiliation campaign.</li>
+    <li>Campaigns: clean desk, festival-season scams, “no client data in public AI tools.”</li>
+    <li>Keep records. Auditors will ask “show me 95% of staff completed 2026 training.”</li>
+  </ul>
+</section>
+
+<section id="rfi">
+  <h2>23. Customer questionnaires and RFIs</h2>
+  <p>This is one of the most visible parts of the JD. A questionnaire is often 50–300 questions in Excel: encryption, SOC location, background checks, physical security, BCP, subprocessors, last pentest date.</p>
+  <p>How a careful junior works:</p>
+  <ol>
+    <li>Never invent. Use the approved knowledge base / last audited answers.</li>
+    <li>Clone last response, then <em>diff</em> against what changed this year.</li>
+    <li>Anything uncertain goes to the control owner (IT, HR, Facilities, Legal).</li>
+    <li>Watch for traps: “Do you encrypt all data at rest?” If one legacy file share is not encrypted, the honest answer is qualified, not a blind Yes.</li>
+    <li>Version the file. Save evidence of who approved the send.</li>
+    <li>After sending, log it: client, date, who signed off. Clients repeat annually.</li>
+  </ol>
+  <div class="card bad">
+    <strong>Career-limiting move:</strong> ticking Yes to win the deal. If the audit later shows No, you have created a contractual and integrity problem. GRC’s value is accurate assurance, not sales fan fiction.
+  </div>
+</section>
+
+<section id="excel">
+  <h2>24. Microsoft Office — this is a real skill, not a throwaway line</h2>
+  <p>The JD names Word, Excel, PowerPoint, collaboration platforms. In GRC, Excel is a workbench.</p>
+  <ul>
+    <li><strong>Excel:</strong> tables, filters, freeze panes, data validation (drop-downs for status), conditional formatting (overdue = red), COUNTIF, XLOOKUP, pivot tables, protecting sheets, comments, versioning. You will own risk registers, training trackers, evidence indexes, questionnaire response matrices.</li>
+    <li><strong>Word:</strong> styles, version tables, headers, tracked changes, policy formatting. Policies look amateur if heading levels are random.</li>
+    <li><strong>PowerPoint:</strong> one-page monthly GRC dashboard: open risks by rating, overdue actions, training %, audit status, questionnaire SLA.</li>
+    <li><strong>Outlook / Teams / SharePoint:</strong> evidence libraries with permissions, meeting notes, chasing without being rude.</li>
+  </ul>
+  <p>Practice before the interview: build a 15-row risk register with conditional colour and a pivot of counts by status. If they share a screen and say “show me,” you will not freeze.</p>
+</section>
+
+<section id="ins">
+  <h2>25. Insurance 101 — only what this role needs</h2>
+  <p>You are not applying to be an underwriter. Still, you will sound lost if you cannot say what the company does.</p>
+  <ul>
+    <li><strong>P&amp;C (property and casualty):</strong> homes, cars, liability, commercial property — not primarily life insurance. Xceedance’s centre of gravity is P&amp;C. They have some life/retirement capability too.</li>
+    <li><strong>Insurer / carrier:</strong> the company that takes the risk.</li>
+    <li><strong>Reinsurer:</strong> insurance for insurers.</li>
+    <li><strong>Broker:</strong> intermediary.</li>
+    <li><strong>MGA:</strong> managing general agent — authorised to underwrite on behalf of a carrier.</li>
+    <li><strong>Underwriting:</strong> decide whether to insure and at what price.</li>
+    <li><strong>Claim:</strong> customer asks to be paid after a loss.</li>
+    <li><strong>TPA:</strong> third-party administrator — handles claims for the carrier. Xceedance has a claims TPA business. That means they may touch highly sensitive claimant data.</li>
+    <li><strong>Policyholder / claimant data:</strong> the crown jewels for confidentiality.</li>
+  </ul>
+  <p>Why GRC is stricter here than at a random startup: insurance is regulated, clients are large, data is personal, and offshore delivery is always in the client security questionnaire.</p>
+</section>
+
+<section id="intro">
+  <h2>26. How a CS graduate should introduce herself</h2>
+  <p>Do not hide the lack of a cyber degree. Frame it.</p>
+  <div class="card ex">
+    <p><strong>A 60–90 second structure.</strong></p>
+    <p>“I am a B.Tech Computer Science graduate. I like structured problems, documentation, and working with people, not only code. I have been preparing specifically for information security GRC because I want to work where technology, process, and trust meet.</p>
+    <p>I understand Xceedance delivers insurance operations and technology for global P&amp;C clients from Gurugram, so clients will only outsource if we can prove governance, risk management, and compliance — ISO 27001, SOC 2, privacy, continuity.</p>
+    <p>I have taught myself the foundations: CIA triad, policy versus procedure, risk registers, control testing and evidence, vendor due diligence, and how a junior analyst supports audits and questionnaires. I know this role is about accuracy, confidentiality, follow-up, and clear English, including shift support for international clients. I do not claim to be an auditor yet. I do claim I can learn the ISMS quickly and not create risk by guessing.”</p>
+  </div>
+  <p>If you did any college project with login roles, logs, or a database, mention it as “I have already thought about access control and integrity in code; this job is the organisational version of that.”</p>
+</section>
+
+<section id="qa-company">
+  <h2>27. Interview questions — company and role</h2>
+  <p>Open each question only after you have tried to answer it aloud.</p>
+
+  <details class="qa"><summary>What do you know about Xceedance?</summary>
+    <div class="a">
+      <p>Xceedance is an insurance-focused consulting, technology, and managed-services company founded in 2013. It serves 350+ P&amp;C insurers, reinsurers, brokers and MGAs, with thousands of employees across the US, UK, Poland, Australia and India. From Gurugram it supports global delivery — underwriting, policy, claims (including TPA), actuarial and CAT modelling, finance, and technology such as Duck Creek implementations and data platforms. Clients trust Xceedance with operational work and sensitive data, which is why a strong internal information security GRC function is part of how the company wins and keeps work. CEO is Arun Balakrishnan. Values include integrity, collaboration, ownership, respect, persistence.</p>
+      <p class="why">They are checking you opened the website and understood it is insurance services, not “an IT company” in the vague campus-placement sense.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Why do you want this GRC role rather than software development?</summary>
+    <div class="a">
+      <p>Because I want to work on trust and process around systems, not only build features. CS taught me how systems fail: bad access, bad data, no logs. GRC is where those failures are prevented with policy, risk, and evidence, and where you speak to the business. I like writing, tracking, and coordinating. I also like that the impact is visible: a complete evidence pack, a closed risk, a client questionnaire that is honest. I can still use my technical literacy to ask better questions of IT.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Why Xceedance, not a pure-play cyber firm?</summary>
+    <div class="a">
+      <p>Three reasons. One, domain: insurance data is sensitive and regulated, so GRC is not cosmetic. Two, international delivery from India: I will see real client assurance, ISO and SOC-style evidence, and vendor risk, which is the fastest education for a fresher. Three, the JD is honest about office and shifts; I want a team that serves global operations, not a theoretical policy team.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What does an Associate Analyst in InfoSec GRC do here?</summary>
+    <div class="a">
+      <p>Support the ISMS day to day: keep policies and records current; help run risk assessments and the risk register; collect audit and client evidence; help test controls and track gaps to closure; draft questionnaire responses under review; run vendor assessment paperwork; coordinate awareness training metrics; write minutes and dashboards; chase owners across IT, HR, legal, privacy, facilities. I work under supervision. I do not set risk appetite or sign the ISO certificate.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Who are our clients and why does that change security?</summary>
+    <div class="a">
+      <p>Insurers and related firms, many in the US and UK. They are regulated, they hold personal and sometimes health or financial data, and they treat Xceedance as a fourth-party or third-party risk. So we must meet their questionnaires, possibly ISO 27001 and SOC 2, GDPR/UK GDPR for European personal data, and contractual security schedules. A missed leaver access is not only an internal IT issue; it can become a client audit finding and a lost renewal.</p>
+    </div>
+  </details>
+</section>
+
+<section id="qa-basics">
+  <h2>28. Interview questions — basics (highest weight)</h2>
+
+  <details class="qa"><summary>What is information security?</summary>
+    <div class="a">
+      <p>Protecting information in any form so that confidentiality, integrity and availability are preserved for the business. It includes people, process and technology. At Xceedance that means policyholder and client data, employee data, and company IP are usable by the right people and not altered or leaked or taken offline accidentally.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Explain the CIA triad with examples.</summary>
+    <div class="a">
+      <p><strong>Confidentiality:</strong> only authorised eyes. Example: claims PDFs not on personal WhatsApp. Control: access control, encryption, classification.<br>
+      <strong>Integrity:</strong> accurate and complete. Example: claim reserve amount not silently edited. Control: logs, maker-checker, change management.<br>
+      <strong>Availability:</strong> usable when needed. Example: claims system up so payments are not delayed. Control: backups, DR, patching, redundant links.<br>
+      Security is a balance; over-locking files can harm availability.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Threat vs vulnerability vs risk.</summary>
+    <div class="a">
+      <p>Threat is the source of harm (ransomware gang, fire, malicious insider). Vulnerability is the weakness (unpatched VPN, no MFA, staff who click). Risk is the combination: that the threat exploits the vulnerability and hurts an asset, considering likelihood and impact. Example: phishing (threat) + no MFA on email (vulnerability) + mailbox full of client data (asset) = high risk of a client data breach.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is GRC?</summary>
+    <div class="a">
+      <p>Governance: direction, roles, policies, accountability. Risk: identify, assess, treat, monitor. Compliance: meet laws, contracts, and standards, and be able to prove it. Together they let the business take informed risk instead of chaotic risk. In this team it shows up as registers, evidence, questionnaires, training, and audits.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Policy vs standard vs procedure vs guideline.</summary>
+    <div class="a">
+      <p>Policy = management’s mandatory high-level rule. Standard = measurable bar (MFA for all remote access). Procedure = numbered steps and owners (how HR and IT run leavers). Guideline = recommended practice. Records/templates capture that the procedure was followed. If I am asked to “update the password policy” I first check whether the change belongs in the policy or in the standard so we do not mix levels.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is a control? Name types.</summary>
+    <div class="a">
+      <p>A measure that reduces risk. Preventive, detective, corrective. Also administrative, technical, physical. Example: badge on the SEZ floor is physical preventive; CCTV is physical detective; access review is administrative detective; MFA is technical preventive; restore from backup is technical corrective.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is a risk register and what would you put in it?</summary>
+    <div class="a">
+      <p>The living list of identified risks. ID, description, asset, threat, vulnerability, existing controls, likelihood, impact, rating, owner, treatment, actions, due date, status, residual rating, last update. I would never leave owner or due date blank. I would merge duplicates and escalate anything high and overdue before the monthly meeting, not during it as a surprise.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Four ways to treat risk?</summary>
+    <div class="a">
+      <p>Reduce/mitigate, avoid, transfer/share, accept. Accept must be by an authorised person, time-bounded, and recorded. Transfer via insurance or contracts does not remove regulatory accountability.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is residual risk?</summary>
+    <div class="a">
+      <p>Risk remaining after controls. Encryption on a laptop reduces impact of theft but residual risk of device loss and downtime remains. Management accepts residual risk against appetite.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Least privilege and need-to-know?</summary>
+    <div class="a">
+      <p>Least privilege: minimum permissions to perform the role (read vs write vs admin). Need-to-know: even with a powerful role, you only see the client or data required. A finance admin does not get all claims medical reports. I would also mention movers: access must be reset when people change teams.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is data classification? Why bother?</summary>
+    <div class="a">
+      <p>Labelling information by sensitivity so handling rules are consistent. If everything is “confidential,” nothing is. If production PII is treated like a cafeteria notice, we will put it in the wrong tool. Classification drives encryption, access, retention, vendor sharing, and whether generative AI tools are allowed.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Give me five common security risks for a company like ours.</summary>
+    <div class="a">
+      <ol>
+        <li>Phishing leading to mailbox or credential theft.</li>
+        <li>Excessive access and orphan accounts after people leave or move.</li>
+        <li>Sensitive data in unsanctioned SaaS or personal email (shadow IT).</li>
+        <li>Vendor or subcontractor mishandling client data.</li>
+        <li>Unpatched systems or misconfigured cloud storage (public bucket).</li>
+      </ol>
+      <p>I would add physical: lost laptop, tailgating at the SEZ. And process: incomplete audit evidence causing client distrust even when the control mostly works.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is an incident vs a problem vs a data breach?</summary>
+    <div class="a">
+      <p>Incident: an event that actually or potentially harms CIA (malware alert, lost laptop). Problem: the underlying cause of recurring incidents (image without disk encryption). Data breach: unauthorised access to or disclosure of personal or confidential data. Not every incident is a breach. GRC helps classify, log, notify legal/privacy if personal data is involved, and record lessons.</p>
+    </div>
+  </details>
+</section>
+
+<section id="qa-frameworks">
+  <h2>29. Interview questions — frameworks in the JD</h2>
+
+  <details class="qa"><summary>What is ISO/IEC 27001?</summary>
+    <div class="a">
+      <p>The international standard for an Information Security Management System. It requires leadership, scope, risk assessment and treatment, documented information, competent people, operational controls, internal audit, management review, and continual improvement. Annex A lists 93 controls (2022) in organisational, people, physical and technological themes. Certification is by an external body. It tells clients we run security as a system, not as heroics.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is an ISMS?</summary>
+    <div class="a">
+      <p>The set of policies, processes, people and technology that manage information security in a planned way. Plan-do-check-act. If the CISO leaves, the ISMS should still run. That is the point.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is a Statement of Applicability?</summary>
+    <div class="a">
+      <p>The SoA lists Annex A controls, whether each is applicable, why, and how it is implemented. It links risk treatment to controls. Auditors start here. If we add a new cloud platform, the SoA and risk assessment should be updated. I would not edit it unsupervised, but I understand why it must not go stale.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Name a few Annex A areas relevant to this job.</summary>
+    <div class="a">
+      <p>Policies; roles; supplier relationships; information classification; HR screening and awareness; physical entry; user access and privileged access; logging; malware; backup; incident management; business continuity; compliance with legal requirements; secure development if we build apps. I do not claim I have memorised all 93 numbers. I know how to look up a control and find the evidence.</p>
+      <p class="why">Honesty about not reciting A.8.24 from memory is better than a wrong number.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is the NIST Cybersecurity Framework?</summary>
+    <div class="a">
+      <p>A US-origin, widely used way to organise cybersecurity. Functions: Govern, Identify, Protect, Detect, Respond, Recover (CSF 2.0 added Govern; 1.1 had five). It is not a certificate like ISO. US clients often speak this language. We can map our ISO controls to CSF functions so one control, for example MFA, supports Protect and also ISO access-control requirements and SOC 2 CC6.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>ISO 27001 vs NIST CSF vs SOC 2 — how do they differ?</summary>
+    <div class="a">
+      <p>ISO 27001: certifiable ISMS, international, process-heavy, Annex A controls. NIST CSF: flexible outcome language, strong in US, maturity and programme structure, not a cert in the same way. SOC 2: US attestation report by a CPA on Trust Services Criteria over a system; Type II proves operating effectiveness over time. A company like Xceedance may use ISO to run the system, map to NIST when a US client asks, and produce SOC 2 because US procurement teams ask for the report. One set of real controls, three ways to talk about them.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is SOC 2 Type I vs Type II? What are the Trust Services Criteria?</summary>
+    <div class="a">
+      <p>Criteria: Security (required), Availability, Processing Integrity, Confidentiality, Privacy. Type I = design at a date. Type II = design + operating effectiveness over a period. Clients prefer Type II. GRC’s pain is evidence across the whole period, not a last-week scramble.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What privacy principles do you know? GDPR vs security?</summary>
+    <div class="a">
+      <p>Lawfulness, purpose limitation, minimisation, accuracy, storage limitation, security, accountability. GDPR/UK GDPR matter because Xceedance may process EU/UK personal data as a processor for insurer clients. India’s DPDPA also applies to digital personal data. Security is necessary for privacy but not sufficient: a perfectly encrypted database of data we should have deleted is still a privacy failure. I would involve legal/privacy on rights requests and breach assessment rather than freelance legal advice.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>RTO vs RPO?</summary>
+    <div class="a">
+      <p>RTO: how quickly a service must return after disruption. RPO: how much data we can afford to lose, which drives backup frequency. Example: claims payment RTO 4 hours, RPO 15 minutes. BCP covers the business process (people, workspace, vendors); DR covers IT restoration.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>What is PCI-DSS and do we need it?</summary>
+    <div class="a">
+      <p>Payment Card Industry Data Security Standard — if you store, process or transmit cardholder data. Xceedance’s public materials mention PCI among standards they consider in infrastructure. Whether a specific process is in PCI scope depends on whether card data is actually touched. I would not assume every team is in PCI scope. I would check data flows. That “check the scope” instinct is the GRC answer.</p>
+    </div>
+  </details>
+</section>
+
+<section id="qa-work">
+  <h2>30. Interview questions — work scenarios (they will ask these)</h2>
+
+  <details class="qa"><summary>A client sends a 150-question security spreadsheet today, due in three days. What do you do?</summary>
+    <div class="a">
+      <p>Log it, confirm the due date and who internally owns the response. Pull the last approved questionnaire and the current knowledge base. Map questions to owners (IT, HR, facilities, legal, GRC). Highlight deltas since last year. Fill only what I can source. Flag red questions in a daily tracker. Never send a Yes I cannot evidence. Ask my manager for a review window before the client deadline. If a question is ambiguous, I ask the client for clarification rather than guessing. After submission, store the final version, approver, and date.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>An auditor asks for evidence of quarterly user access reviews. The IT owner sends a screenshot of a Teams chat saying “looks good.” Is that enough?</summary>
+    <div class="a">
+      <p>No. I need a dated system export or review sheet listing users, reviewer identity, period covered, decisions (retain/revoke), and tickets for revocations. A chat is not attributable, complete, or period-matched. I would explain politely why, share a template, and help them pull the export. If they cannot produce it, that is a gap: control may have failed, and we record it rather than manufacturing evidence. Creating fake evidence is a red line.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>How would you help with a risk assessment for a new SaaS tool that will hold client names?</summary>
+    <div class="a">
+      <p>Understand the process and data: personal data? which clients’ contractual restrictions? where is data stored geographically? who at the vendor can see it? subprocessors? Then identify threats (vendor breach, misconfiguration, legal access in another country). Score inherent risk. Collect vendor due diligence (ISO, SOC 2 Type II, pentest, DPA). Propose treatments: contract clauses, SSO/MFA, DLP, limited fields, masking, exit/deletion. Record residual risk and get the right person to accept. Add to vendor inventory and review calendar. If a client forbids that cloud region, that is avoid, not mitigate.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Training completion is 72% and the CISO wants 95% before an audit in four weeks. What do you do?</summary>
+    <div class="a">
+      <p>Segment the 28%: by team, by joining date, by people who never started vs people stuck. Send targeted reminders with deadline and link, then escalate to managers with names, not a blast that everyone ignores. Offer a drop-in hour for people with login issues. Report twice a week. Do not mark people complete without the LMS record. If some are on long leave, document exceptions. Awareness is only a control if the record is true.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>You find 5 of 20 sampled leavers still had VPN access. Write the observation in two or three sentences.</summary>
+    <div class="a">
+      <p>“In a sample of 20 employee exits between 1 Apr and 30 Jun, 5 accounts still had active VPN access more than 24 hours after the HR last-working-day (employee IDs …, tickets …). This does not meet Access Control Procedure IS-AC-04, which requires disablement within 24 hours. Risk: former staff or reused credentials could access the network. Recommend: root-cause with HR-IT handshake, implement an automated disable trigger, retest 15 new leavers within 30 days.”</p>
+      <p class="why">Tone is factual. Sample size stated. Policy cited. Risk stated. Action proposed.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>A business owner says the risk is closed because “we told people to be careful.” Do you close it?</summary>
+    <div class="a">
+      <p>Not on that basis. Awareness can be a control but rarely closes a high technical risk alone. I would ask what changed in likelihood or impact, what evidence exists (config, ticket, training record), and whether residual risk is within appetite. If they want to accept rather than mitigate, that is an acceptance with an approver, not a silent close. I would discuss with my manager rather than fight the owner alone.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>HR wants to onboard a background-verification vendor next week. Security review usually takes three weeks. What do you do?</summary>
+    <div class="a">
+      <p>Do not skip due diligence because of a calendar. Triage: what data does the vendor get (Aadhaar, addresses, criminal records — high sensitivity). See if they are already assessed. If new, run a fast-path with minimum evidence: questionnaire, certs, DPA, and a time-boxed exception if leadership accepts residual risk with compensating controls (limited data, no client PII, contract). Document the exception expiry. GRC enables the business with eyes open, not with a rubber stamp and not with a brick wall and no alternative.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>How would you prepare a management-review pack?</summary>
+    <div class="a">
+      <p>A short slide or memo: ISMS scope changes; risk profile (count by rating, top 5, overdue actions); incidents and significant near-misses; audit results and open NCs; training completion; questionnaire/client audit load; vendor high-risk items; privacy issues; BCP tests; resource or tool needs; decisions asked of leadership. Attach registers. I would agree the storyline with my manager first. Leadership time is scarce; no 80-slide dump.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Walk me through joiner-mover-leaver from a GRC view.</summary>
+    <div class="a">
+      <p>Joiner: identity proofing and screening as policy requires, account created after HR ticket, role-based access approved by manager, acknowledgement of acceptable use and confidentiality, induction training. Mover: old role access removed, new role access granted, not piled on. Leaver: HR triggers date and time, all accounts and tokens and badges revoked on a defined SLA, mailbox handled, equipment returned, acknowledgement recorded. GRC tests samples and keeps the procedure and evidence living. The failure mode is movers and contractors.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>A colleague forwards you a client incident email and says “don’t tell anyone.” What do you do?</summary>
+    <div class="a">
+      <p>Incident details go through the incident process, not through gossip or a private promise. I would not spread it on the floor. I would tell my manager / incident owner immediately, because delayed escalation can miss legal notification clocks. Confidentiality means need-to-know inside the process, not hiding from the process. Integrity of character is a hiring criterion in this JD for a reason.</p>
+    </div>
+  </details>
+</section>
+
+<section id="qa-behave">
+  <h2>31. Behavioural questions (use STAR, keep them short)</h2>
+  <p>STAR: Situation, Task, Action, Result. Even if your examples are from college, internships, or group projects, pick ones that show detail, follow-up, writing, ethics, or coordination.</p>
+
+  <details class="qa"><summary>Tell me about yourself.</summary>
+    <div class="a"><p>Use the 60–90 second script in section 26. Present, not life story from school. End with why this role this company.</p></div>
+  </details>
+
+  <details class="qa"><summary>Describe a time you were detail-oriented.</summary>
+    <div class="a">
+      <p>Pick a project where a small error would have cascaded: a database project, exam duty list, internship tracker. Show you built a checklist, caught a mismatch, and fixed the process so it would not recur. GRC translation: “I treat trackers as production data.”</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>A stakeholder is not responding and a deadline is near.</summary>
+    <div class="a">
+      <p>I send a specific ask (“need columns D–G by 3 p.m., 8 rows only”), then a calendar invite of 15 minutes, then escalate with facts to my manager before the external deadline, not after. I copy people only when it helps. I offer to sit with them to extract evidence so I am not just adding work.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>How do you handle confidential information?</summary>
+    <div class="a">
+      <p>Need-to-know, no public places, no personal email or unsanctioned AI tools, lock screen, labelled files, careful printing, careful Teams membership. I do not discuss client names or incidents socially. If I am unsure whether something is shareable, I ask. I would rather look slow than leak.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Strengths and weaknesses.</summary>
+    <div class="a">
+      <p>Strengths: structured writing, follow-up, willingness to say I do not know, Excel comfort, CS literacy. Weakness: I have not yet lived an external ISO audit cycle — I am closing that with this study and I want to be the person who owns the evidence index in my first cycle so the gap becomes a skill quickly. Do not say “I am a perfectionist” as a fake weakness.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Tell me about a conflict on a team.</summary>
+    <div class="a">
+      <p>College group project version is fine: disagreement on quality vs speed, you documented facts, split work, involved the mentor early. In GRC, conflict is often “IT says the control works, evidence says it does not.” Stay on artefacts, not personalities.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Why should we hire you with no security degree?</summary>
+    <div class="a">
+      <p>The JD allows CS. The work is analysis, documentation, coordination, integrity, and foundational security knowledge. I have built that foundation on purpose against your JD: CIA, GRC, ISO 27001 at ISMS level, NIST CSF functions, SOC 2 TSC and Type II, privacy principles, BCP RTO/RPO, vendor due diligence, awareness metrics, evidence quality. I already think in systems because of CS. I am stable on office and shifts. A referral got me the conversation; the work habits will keep me useful after month one.</p>
+    </div>
+  </details>
+</section>
+
+<section id="qa-hr">
+  <h2>32. HR, location, shifts, salary</h2>
+
+  <details class="qa"><summary>This is work from office in Gurugram, Sector 48 SEZ. Are you sure?</summary>
+    <div class="a">
+      <p>Yes. I know the office is at Candor TechSpace, Building 6, Sector 48, Tikri. I am prepared to commute and work from the floor. GRC evidence and collaboration with IT, facilities and HR is easier in person, and the JD is explicit.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Are you open to shifts and changing shift timings?</summary>
+    <div class="a">
+      <p>Yes. International clients mean overlap with US and UK hours, audits, and incident calls. I understand timings can change with coverage needs. I will manage sleep and transport so I am reliable, not merely willing on paper.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Salary expectations?</summary>
+    <div class="a">
+      <p>I want a fair entry-level package for a specialist GRC associate in Gurugram. Public ranges for Xceedance analysts are often around ₹3–4 LPA, with more specialised risk roles higher. I will consider the full offer: role quality, learning, shifts, benefits. I am more interested in the team and the work than in over-indexing on a number before I hear the band. If they press, give a band, not a single rupee, and do not invent a competing offer.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Where do you see yourself in 3 years?</summary>
+    <div class="a">
+      <p>A GRC analyst who can run a control domain end to end: for example vendor risk or ISMS documentation or client assurance. I would like a foundation certificate (ISC2 CC or ISO 27001 Foundation) in year one and to have lived at least one external audit cycle. I am not aiming to jump to CISO talk. I am aiming to become the person the manager trusts with the register.</p>
+    </div>
+  </details>
+
+  <details class="qa"><summary>Are you considering other offers / how soon can you join?</summary>
+    <div class="a">
+      <p>Be truthful. Referral processes can be slow; stay polite and follow up. Give a realistic notice or immediate-joining date. Do not play games.</p>
+    </div>
+  </details>
+</section>
+
+<section id="ask">
+  <h2>33. Questions you should ask them</h2>
+  <p>Asking nothing looks uninterested. Ask 3–5, not 15.</p>
+  <ol>
+    <li>Which frameworks are actually in live operation today — ISO 27001 certified, SOC 2 Type II, client-specific, or a mix — and which would I support first?</li>
+    <li>How is the GRC team sized in Gurugram, and who would I sit with day to day?</li>
+    <li>What does a successful first six months look like for this associate seat?</li>
+    <li>How much of the work is internal ISMS versus client questionnaires versus vendor assessments?</li>
+    <li>Which tools do you use for GRC — Excel/SharePoint, or a platform such as ServiceNow, Archer, OneTrust?</li>
+    <li>What does the shift pattern look like for this team in the next quarter?</li>
+    <li>How do you train someone who is strong in CS but new to security — buddy system, ISMS walkthrough, certificate support?</li>
+  </ol>
+</section>
+
+<section id="mistakes">
+  <h2>34. Mistakes CS graduates make in this interview</h2>
+  <div class="card bad">
+    <ul>
+      <li>Talking for five minutes about ethical hacking tools they used once in a YouTube video.</li>
+      <li>Saying “I will ensure zero risk.” Impossible, and it shows you do not understand risk.</li>
+      <li>Mixing confidentiality with privacy, or ISO with SOC 2, or Type I with Type II.</li>
+      <li>Claiming “we were ISO certified in my college project.”</li>
+      <li>Guessing a questionnaire answer in the hypothetical. The correct move is to check.</li>
+      <li>Sounding allergic to Excel, documentation, or follow-up mail. That is the job.</li>
+      <li>Negotiating remote work when the JD says office, or hedging on shifts.</li>
+      <li>Speaking badly of another company, or of Xceedance reviews.</li>
+      <li>Using slang or filler in a role that writes to US/UK clients.</li>
+      <li>Memorising control numbers and collapsing when asked “what would you actually do on Tuesday.”</li>
+    </ul>
+  </div>
+  <h3>Words that help</h3>
+  <p>evidence, owner, due date, residual risk, need-to-know, sample, exception, compensating control, under supervision, I would verify, I would not fabricate, client contractual requirement, ISMS.</p>
+</section>
+
+<section id="cheat">
+  <h2>35. One-page cheat sheet (read the morning of the interview)</h2>
+  <div class="card">
+    <p><strong>Company:</strong> Xceedance — insurance operations, technology, data for global P&amp;C clients. Gurugram SEZ delivery. Founded 2013, CEO Arun Balakrishnan. Values: Integrity, Collaboration, Ownership, Respect, Persistence.</p>
+    <p><strong>This job:</strong> junior internal InfoSec GRC. Policies, risk register, audit evidence, control testing, client questionnaires, vendor due diligence, awareness tracking, reports. Office + shifts. 0–1 year.</p>
+    <p><strong>CIA:</strong> Confidentiality, Integrity, Availability.</p>
+    <p><strong>Risk:</strong> threat × vulnerability against an asset; likelihood × impact; treat by reduce / avoid / transfer / accept; leftover is residual.</p>
+    <p><strong>Docs:</strong> policy (what) → standard (measurable) → procedure (how) → guideline (advice) → record (proof).</p>
+    <p><strong>ISO 27001:</strong> ISMS standard, certifiable, clauses 4–10 + Annex A 93 controls (2022). SoA maps controls.</p>
+    <p><strong>NIST CSF 2.0:</strong> Govern, Identify, Protect, Detect, Respond, Recover. Not the same as certification.</p>
+    <p><strong>SOC 2:</strong> Security + optional Availability, Processing Integrity, Confidentiality, Privacy. Type II = over time.</p>
+    <p><strong>Privacy:</strong> minimisation, purpose limitation, processor vs controller, DPDPA + GDPR awareness, 72-hour idea for GDPR breach notification to authorities.</p>
+    <p><strong>BCP:</strong> RTO = time to recover; RPO = data you can lose.</p>
+    <p><strong>Access:</strong> least privilege, need-to-know, joiner-mover-leaver, recertification, MFA.</p>
+    <p><strong>Evidence:</strong> dated, complete, attributable, real. No screenshots of “looks good.”</p>
+    <p><strong>Golden sentence:</strong> “I don’t know the current control state, I will check the owner and the evidence rather than guess.”</p>
+  </div>
+
+  <h3>Free learning after you pass (or while you wait)</h3>
+  <ul>
+    <li>ISC2 Certified in Cybersecurity (CC) official outline — closest match to this JD among entry certs.</li>
+    <li>NIST CSF 2.0 official PDF — short, readable, free.</li>
+    <li>ISO 27001:2022 overview articles from ICO/BSI-style explainers — do not pirate the paid standard text.</li>
+    <li>AICPA Trust Services Criteria summary for SOC 2.</li>
+    <li>Microsoft Learn SC-900 modules if you like structured slides.</li>
+    <li>Practise Excel: a fake risk register and a fake training tracker.</li>
+  </ul>
+</section>
+
+<p><a href="/xceedance-grc-interview-guide/">Both guides</a> · <a href="/xceedance-grc-interview-guide/secops.html">Security Operations guide</a></p>
+<footer>
+  <p>Prepared as a teaching guide for a referred interview: Associate Analyst, Information Security GRC, Xceedance Gurugram. Company facts drawn from Xceedance’s public website and public profiles (leadership, office address, service lines, published compliance mentions). Review-site ranges are approximate and change. This is not legal, HR, or certification advice, and it is not an official Xceedance document.</p>
+  <p>Read in order. Teach yourself the basics. Then use the questions. Do not bluff.</p>
+</footer>
+</main>
+</div>
+<script>
+  function filterPage(v) {
+    v = (v || "").toLowerCase().trim();
+    document.querySelectorAll("main section").forEach(sec => {
+      sec.style.display = !v || sec.innerText.toLowerCase().includes(v) ? "" : "none";
+    });
+  }
+  const links = [...document.querySelectorAll('nav a[href^="#"]')];
+  const secs = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + e.target.id));
+    });
+  }, { rootMargin: "-20% 0px -70% 0px" });
+  secs.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

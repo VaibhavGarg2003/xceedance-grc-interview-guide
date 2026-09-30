@@ -2,9 +2,9 @@
 
 Teaching-first guides for two Associate Analyst roles at **Xceedance, Gurugram**, written for a B.Tech Computer Science graduate with no security background.
 
-**Start here (both roles):** https://vaibhavgarg2003.github.io/xceedance-grc-interview-guide/home.html
+**Start here (both roles):** https://vaibhavgarg2003.github.io/xceedance-grc-interview-guide/
 
 - **Security Operations** (interview is first): https://vaibhavgarg2003.github.io/xceedance-grc-interview-guide/secops.html
-- **Information Security GRC** (unchanged): https://vaibhavgarg2003.github.io/xceedance-grc-interview-guide/
+- **Information Security GRC**: https://vaibhavgarg2003.github.io/xceedance-grc-interview-guide/grc.html
 
-Read each guide in order, then use the interview questions.
+Every page has the same top buttons: Both guides · SecOps · GRC.
