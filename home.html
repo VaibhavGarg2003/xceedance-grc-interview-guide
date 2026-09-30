@@ -28,10 +28,18 @@
   .btn:hover { background:#1b6f63; }
   .note { background:#fff; border-left:4px solid #1b6f63; padding:14px 16px; margin:18px 0; }
   footer { color:var(--muted); font-size:.85rem; }
+  .switch { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; }
+  .switch a { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); color:#fff; text-decoration:none; padding:7px 12px; border-radius:8px; font-size:.8rem; font-weight:650; }
+  .switch a.on { background:#1b6f63; border-color:#1b6f63; }
 </style>
 </head>
 <body>
 <header class="hero">
+  <div class="switch">
+    <a class="on" href="home.html">Both guides</a>
+    <a href="secops.html">SecOps</a>
+    <a href="index.html">GRC</a>
+  </div>
   <div class="kicker">Xceedance · Gurugram · two open roles</div>
   <h1>Interview guides for a Computer Science graduate</h1>
   <p>Same company, two teams, two interviews. Security Operations is first. GRC is later. Both guides teach from zero, with examples, then give interview questions and answers. Start with the interview that comes sooner.</p>

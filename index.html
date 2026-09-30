@@ -51,6 +51,11 @@
   nav a { display: block; color: #c9d6d1; text-decoration: none; font-size: .86rem; padding: 5px 8px; border-radius: 6px; }
   nav a:hover, nav a.active { background: #1c3a58; color: #fff; }
   nav .g { margin: 14px 0 6px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: #8aa39a; }
+  nav .switch { display: flex; gap: 6px; margin-bottom: 14px; }
+  nav .switch a { flex: 1; text-align: center; background: #1c3a58; color: #fff; padding: 7px 6px; border-radius: 8px; font-size: .75rem; font-weight: 650; text-decoration: none; }
+  nav .switch a.on { background: #1b6f63; color: #fff; }
+  nav .switch a:hover { background: #245a7a; color: #fff; }
+  nav .switch a.on:hover { background: #1b6f63; }
   main { padding: 28px 8vw 80px; max-width: 980px; }
   .hero {
     background: linear-gradient(145deg, var(--navy), var(--navy-2) 55%, #1b6f63);
@@ -102,6 +107,11 @@
 <body>
 <div class="wrap">
 <nav id="toc">
+  <div class="switch">
+    <a href="home.html">Both guides</a>
+    <a href="secops.html">SecOps</a>
+    <a class="on" href="index.html">GRC</a>
+  </div>
   <h1>Xceedance GRC Interview Guide</h1>
   <p>Associate Analyst · Information Security GRC · Gurugram</p>
   <input id="q" type="search" placeholder="Search this page…" oninput="filterPage(this.value)">
@@ -1138,6 +1148,7 @@
   </ul>
 </section>
 
+<p><a href="home.html">Both guides</a> · <a href="secops.html">Security Operations guide</a></p>
 <footer>
   <p>Prepared as a teaching guide for a referred interview: Associate Analyst, Information Security GRC, Xceedance Gurugram. Company facts drawn from Xceedance’s public website and public profiles (leadership, office address, service lines, published compliance mentions). Review-site ranges are approximate and change. This is not legal, HR, or certification advice, and it is not an official Xceedance document.</p>
   <p>Read in order. Teach yourself the basics. Then use the questions. Do not bluff.</p>
@@ -1151,7 +1162,7 @@
       sec.style.display = !v || sec.innerText.toLowerCase().includes(v) ? "" : "none";
     });
   }
-  const links = [...document.querySelectorAll("nav a")];
+  const links = [...document.querySelectorAll('nav a[href^="#"]')];
   const secs = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
